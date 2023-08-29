@@ -1,0 +1,23 @@
+﻿html {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+body {
+    background-image: url('..//Images/bookbg4.jfif');
+}
+
+
+
+.book-container {
+    display:flex;
+
+}
+
+.book {
+    background-color: rgb(50 195 209);
+    outline: 3px solid black;
+    width: 200px;
+    margin-left: 20px;
+}

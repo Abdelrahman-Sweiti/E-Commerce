@@ -1,0 +1,62 @@
+﻿using ECommerce.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
+namespace ECommerce.Data
+{
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    {
+        public ApplicationDbContext(DbContextOptions options) : base(options)
+        {
+
+
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+
+            modelBuilder.Entity<ProductsCart>().HasKey(
+               ProductsCart => new
+               {
+                   ProductsCart.CartId,
+                   ProductsCart.ProductId
+               }
+               );
+
+
+            modelBuilder.Entity<ProductsCategory>().HasKey(
+               ProductsCategory => new
+               {
+                   ProductsCategory.CategoryId,
+                   ProductsCategory.ProductId
+               }
+               );
+
+
+
+            modelBuilder.Entity<ProductsOrder>().HasKey(
+               ProductsOrder => new
+               {
+                   ProductsOrder.OrderId,
+                   ProductsOrder.ProductId
+               }
+               );
+        }
+
+
+        public DbSet<Product> products { get; set; }
+        public DbSet<Cart> carts { get; set; }
+        public DbSet<Category> categories { get; set; }
+        public DbSet<ProductsCart> ProductsCarts { get; set; }
+        public DbSet<ProductsCategory> productsCategories { get; set; }
+        public DbSet<ProductsOrder> productsOrders { get; set; }
+
+        public DbSet<RegisterViewModel> RegisterViewModel { get; set; }
+
+
+        public DbSet<SignInModel> SignInModel { get; set; }
+
+    }
+}

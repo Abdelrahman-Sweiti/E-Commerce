@@ -1,0 +1,48 @@
+﻿@model ECommerce.Models.Product
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<meta charset="UTF-8" lang="en">
+
+<link rel="stylesheet" href="~/css/ProductReg.css" />
+
+
+<video src="~/Images/The Joy of Products.mp4" muted autoplay loop></video>
+
+
+<div class="Full">
+    <div class="FullBox">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="field">
+                <label asp-for="ProductName"></label>
+                <input asp-for="ProductName" autocomplete="off" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="Price"></label>
+                <input asp-for="Price" autocomplete="off" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" autocomplete="off" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="field">
+                <label asp-for="ImageUri"></label>
+                <input asp-for="ImageUri" autocomplete="off" />
+                <span asp-validation-for="ImageUri" class="text-danger"></span>
+            </div>
+
+            <input type="submit" value="Create Product" class="btn1" />
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,175 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/AccIndex.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=East+Sea+Dokdo&family=Lobster&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=East+Sea+Dokdo&family=Lobster&family=Source+Code+Pro:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=East+Sea+Dokdo&family=Lobster&family=Roboto:ital,wght@1,100&family=Source+Code+Pro:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=East+Sea+Dokdo&family=Lobster&family=Roboto:ital,wght@1,100&family=Seymour+One&family=Source+Code+Pro:wght@300&display=swap" rel="stylesheet">
+<div class="MainBanner">
+
+
+    <h1>    <span>Seek</span>&nbsp;<span class="word1">Knowledge</span></h1>
+</div>
+
+
+<div class="Hero" id="Services">
+    <h1>our Features</h1>
+
+    <div class="box1">
+        <img src="~/Images/book1.png" />
+        <h2>Publish your own Book</h2>
+        <p>you can add a book that you have created and make others explore it</p>
+        <a href="#">More</a>
+    </div>
+    <div class="box2">
+        <img src="~/Images/book2.png" />
+        <h2>Easy book Sharing</h2>
+        <p>you can share the link of your work inside the website to others and they can access it fast and easy</p>
+        <a href="#">More</a>
+    </div>
+    <div class="box3">
+        <img src="~/Images/book3.png" />
+        <h2>Marketing and Profit</h2>
+        <p>if someone is intrested in your book and wants to buy it , our website helps you with that easily </p>
+        <a href="#">More</a>
+    </div>
+    <div class="box4">
+        <img src="~/Images/book4.png" />
+        <h2>CopyRight Grantee</h2>
+        <p>all your published books will be secured and any copy that is sold will have a copyright Grantee</p>
+        <a href="#">More</a>
+    </div>
+</div>
+
+
+<div class="contact" id="Contact">
+
+    <div class="contact-box1">
+        <h1>Contact us</h1>
+        <div class="child1">
+            <img src="~/Images/email2.png" />
+            <h2>Email</h2>
+            <p>godgold11@gmail.com</p>
+        </div>
+
+        <div class="child2">
+            <img src="~/Images/phone2.png" />
+            <h2>Phone</h2>
+            <p>+962796153883</p>
+        </div>
+    </div>
+
+    <br />
+    @*<div role="alert"class="alert alert-danger">
+    Users Counts = @ViewBag.count
+
+    </div>*@
+
+</div>
+<form method="post">
+
+    <div class="Search-box" id="BookExp">
+
+        <h1>
+            <span>S</span>
+            <span>e</span>
+            <span>a</span>
+            <span>r</span>
+            <span>c</span>
+            <span>h</span>
+            <span>&nbsp;</span>
+            <span>F</span>
+            <span>o</span>
+            <span>r</span>
+            <span>&nbsp;</span>
+            <span>B</span>
+            <span>o</span>
+            <span>o</span>
+            <span>k</span>
+            <span>s</span>
+            <span>&nbsp;</span>
+            <span>T</span>
+            <span>h</span>
+            <span>a</span>
+            <span>t</span>
+            <span>&nbsp;</span>
+            <span>Y</span>
+            <span>o</span>
+            <span>u</span>
+            <span>&nbsp;</span>
+            <span>L</span>
+            <span>i</span>
+            <span>k</span>
+            <span>e</span>
+            <span>&nbsp;</span>
+            <span>!</span>
+        </h1>
+
+
+        <input class="bar1" type="text" asp-controller="Account" asp-action="rows" name="bookname" placeholder="Search for a book" />
+
+        <input class="bar2" type="submit" value="Search" />
+
+    </div>
+
+</form>
+
+
+
+
+
+<script>
+    const word1 = document.querySelector('.word1');
+
+    let colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
+    let colorIndex = 0;
+
+    setInterval(() => {
+        word1.style.color = colors[colorIndex];
+        colorIndex = (colorIndex + 1) % colors.length;
+    }, 1000);
+
+
+
+    document.querySelector('nav a[href="#Services"]').addEventListener('click', function (event) {
+        event.preventDefault(); // prevent the default action of the link
+
+        const servicesSection = document.querySelector('#Services');
+        const servicesSectionTop = servicesSection.getBoundingClientRect().top + window.scrollY; // get the position of the element relative to the top of the viewport
+
+        window.scrollTo({
+            top: servicesSectionTop,
+            behavior: 'smooth'
+        });
+    });
+    document.querySelector('nav a[href="#Contact"]').addEventListener('click', function (event) {
+        event.preventDefault(); // prevent the default action of the link
+
+        const servicesSection = document.querySelector('#Contact');
+        const servicesSectionTop = servicesSection.getBoundingClientRect().top + window.scrollY; // get the position of the element relative to the top of the viewport
+
+        window.scrollTo({
+            top: servicesSectionTop,
+            behavior: 'smooth'
+        });
+    });
+
+    document.querySelector('nav a[href="#BookExp"]').addEventListener('click', function (event) {
+        event.preventDefault(); // prevent the default action of the link
+
+        const servicesSection = document.querySelector('#BookExp');
+        const servicesSectionTop = servicesSection.getBoundingClientRect().top + window.scrollY; // get the position of the element relative to the top of the viewport
+
+        window.scrollTo({
+            top: servicesSectionTop,
+            behavior: 'smooth'
+        });
+    });
+</script>
