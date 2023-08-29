@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1" lang="en" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/LayoutStyle1.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark  fixed-top p-2">
+            <a class="navbar-brand" asp-controller="Main" asp-action="Index">
+                <img src="~/Images/OP Logo.gif" width="30" height="30">
+            </a>
+            <ul class="navbar-nav mr-auto">
+
+
+
+                <li class="nav-item">
+                    <a class="nav-link " href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="#Services">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="#Contact">Contact</a>
+                </li>
+                <li class="nav-item  ">
+                    <a class="nav-link " asp-controller="Products" asp-action="Create">Add New Product <span class="sr-only"></span></a>
+                </li>
+
+
+
+
+                @if (SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "Admin"))
+                {
+                    <li class="nav-item  ">
+                        <a class="nav-link " asp-controller="Products" asp-action="ViewAllProducts">View All Products <span class="sr-only"></span></a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a class="nav-link " href="#BookExp">Explore Books</a>
+                </li>
+
+            </ul>
+
+            <ul class="ms-auto"> <partial name="LoginInfo" /> </ul>
+        </nav>
+    </header>
+    <div>
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

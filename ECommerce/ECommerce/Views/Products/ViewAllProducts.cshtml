@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ECommerce.Models.Product>
+
+@{
+    ViewData["Title"] = "ViewAllProducts";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/AdminViewProducts.css" />
+
+
+<h1>All Products in the Database</h1>
+
+<div class="product-container">
+    @foreach (var item in Model)
+    {
+        <div class="product">
+            <h2 class="product-title">@item.ProductName</h2>
+            <p class="product-price">@item.Price</p>
+            <p class="product-description">@item.Description</p>
+            @if (item.ImageUri != null)
+            {
+                <img src="@item.ImageUri" alt="@item.ProductName" class="product-image" width="200" height="200"/>
+            }
+            else
+            {
+                <p>No Image Available</p>
+            }
+            <div class="product-buttons">
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    }
+</div>
