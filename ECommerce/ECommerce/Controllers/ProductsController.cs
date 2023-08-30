@@ -3,16 +3,20 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ECommerce.Models;
+using ECommerce.Models.Interfaces;
 
 namespace ECommerce.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IProduct _Product;
 
-        public ProductsController(ApplicationDbContext context)
+
+        public ProductsController(ApplicationDbContext context, IProduct Product)
         {
             _context = context;
+            _Product= Product;
 
         }
 
@@ -50,37 +54,22 @@ namespace ECommerce.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProductName,ImageUri,Price,Description")] Product product, IFormFile image)
+        public async Task<IActionResult> Create([Bind("Id,ProductName,ImageUri,Price,Description")] Product product)
         {
             if (ModelState.IsValid)
             {
-                if (image != null && image.Length > 0)
-                {
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        await image.CopyToAsync(memoryStream);
-                        var imageDataBytes = memoryStream.ToArray();
-                        var base64String = Convert.ToBase64String(imageDataBytes);
-                        var dataUri = $"data:image/jpeg;base64,{base64String}";
-                        product.ImageUri = new Uri(dataUri);
-                    }
-                }
-
                 _context.Add(product);
                 await _context.SaveChangesAsync();
-
-                return RedirectToAction("Index", "Main");
+                return RedirectToAction("ViewAllProducts", "Products");
             }
             return View(product);
         }
 
 
 
-
-        // GET: BookModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.products == null)
             {
                 return NotFound();
             }
@@ -93,6 +82,8 @@ namespace ECommerce.Controllers
             return View(product);
         }
 
+
+      
         // POST: BookModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -123,9 +114,9 @@ namespace ECommerce.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("ViewAllProducts", "Products");
             }
-            return View(product);
+            return RedirectToAction("ViewAllProducts", "Products");
         }
 
         // GET: BookModels/Delete/5
