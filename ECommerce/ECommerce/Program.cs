@@ -15,7 +15,6 @@ namespace ECommerce
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             builder.Services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
@@ -24,7 +23,8 @@ namespace ECommerce
             builder.Services
                 .AddDbContext<ApplicationDbContext>
             (opions => opions.UseSqlServer(connString));
-
+            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            builder.Services.AddControllersWithViews();
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
@@ -35,6 +35,7 @@ namespace ECommerce
 
             builder.Services.AddTransient<IUser, IdentityUserService>();
             builder.Services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
+            builder.Services.AddTransient<IProduct, ProductService>();
 
             var app = builder.Build();
 

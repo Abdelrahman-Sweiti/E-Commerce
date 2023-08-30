@@ -1,7 +1,6 @@
 ﻿using ECommerce.Data;
 using ECommerce.Models.Interfaces;
 using Microsoft.AspNetCore.Identity;
-
 namespace ECommerce.Models.Services
 {
     public class IdentityUserService : IUser
@@ -55,11 +54,7 @@ namespace ECommerce.Models.Services
         }
 
 
-        public int Count()
-        {
-
-            return _context.Users.Count();
-        }
+       
 
 
         public async Task<string> GetUserIdAsync(string email)
@@ -68,7 +63,7 @@ namespace ECommerce.Models.Services
             return user.Id;
         }
 
-       
+
 
 
     }

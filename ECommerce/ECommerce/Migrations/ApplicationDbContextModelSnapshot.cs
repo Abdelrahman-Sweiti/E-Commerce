@@ -205,6 +205,7 @@ namespace ECommerce.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUri")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
