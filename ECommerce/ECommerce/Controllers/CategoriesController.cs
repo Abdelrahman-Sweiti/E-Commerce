@@ -7,24 +7,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ECommerce.Data;
 using ECommerce.Models;
+using ECommerce.Models.Interfaces;
 
 namespace ECommerce.Controllers
 {
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly ICategory _Category;
 
-        public CategoriesController(ApplicationDbContext context)
+
+        public CategoriesController(ApplicationDbContext context, ICategory Category)
         {
             _context = context;
+            _Category = Category;
         }
 
         // GET: Categories
         public async Task<IActionResult> Index()
         {
-              return _context.categories != null ? 
-                          View(await _context.categories.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.categories'  is null.");
+            var list1 = await _Category.GetCategories();
+
+            return View(list1);
         }
 
         // GET: Categories/Details/5
@@ -158,6 +162,34 @@ namespace ECommerce.Controllers
         private bool CategoryExists(int id)
         {
           return (_context.categories?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+
+        public IActionResult AddProductToCategories(int CategoryId)
+        {
+            ProductsCategory categoryProduct = new ProductsCategory()
+            {
+                CategoryId = CategoryId
+            };
+
+            return View(categoryProduct);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddProductToCategories(ProductsCategory categoryProduct )
+        {
+            if (ModelState.IsValid)
+            {
+                await _Category.AddProductToCategories(categoryProduct.CategoryId, categoryProduct.product);
+                TempData["AlertMessage"] = "A new product Added to a Category successfully :)";
+
+                return RedirectToAction("Index", "Main");
+            }
+            else
+            {
+                return RedirectToAction("ViewAllProducts", "Products");
+            }
         }
     }
 }

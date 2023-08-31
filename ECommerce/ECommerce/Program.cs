@@ -36,6 +36,8 @@ namespace ECommerce
             builder.Services.AddTransient<IUser, IdentityUserService>();
             builder.Services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
             builder.Services.AddTransient<IProduct, ProductService>();
+            builder.Services.AddTransient<ICategory, CategoryService>();
+
 
             var app = builder.Build();
 

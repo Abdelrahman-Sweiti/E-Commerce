@@ -6,7 +6,7 @@
         public int ProductId { get; set; }
 
 
-        public Category category { get; set; }
+        public Category? category { get; set; }
         public Product product { get; set; }
 
     }
