@@ -7,7 +7,7 @@
 
 
         public Category? category { get; set; }
-        public Product product { get; set; }
+        public Product? product { get; set; }
 
     }
 }

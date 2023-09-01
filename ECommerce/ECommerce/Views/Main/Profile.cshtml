@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+
+<h1>Profile</h1>
+
+
+<table>
+
+    <tr>
+        <td> First Name</td>
+        <td>@User.FindFirst("UserFirstName").Value</td>
+    </tr>
+    <tr>
+        <td> Last Name</td>
+        <td>@User.FindFirst("UserLastName").Value</td>
+    </tr>
+    <tr>
+        <td> Gender</td>
+        <td>@User.FindFirst("Gender").Value</td>
+    </tr>
+    <tr>
+        <td> Email</td>
+        <td>@User.FindFirst("Email").Value</td>
+    </tr>
+
+
+
+</table>
+
+<br />
+<a asp-controller="Main" asp-action="UpdateInfo" class="btn btn-outline-warning">Update Info</a>

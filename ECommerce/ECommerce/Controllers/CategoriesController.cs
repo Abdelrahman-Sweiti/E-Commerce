@@ -15,12 +15,14 @@ namespace ECommerce.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ICategory _Category;
+        private readonly IProductsCategory _productsCategory;
 
 
-        public CategoriesController(ApplicationDbContext context, ICategory Category)
+        public CategoriesController(ApplicationDbContext context, ICategory Category, IProductsCategory productsCategory)
         {
             _context = context;
             _Category = Category;
+            _productsCategory = productsCategory;
         }
 
         // GET: Categories
@@ -182,7 +184,6 @@ namespace ECommerce.Controllers
             if (ModelState.IsValid)
             {
                 await _Category.AddProductToCategories(categoryProduct.CategoryId, categoryProduct.product);
-                TempData["AlertMessage"] = "A new product Added to a Category successfully :)";
 
                 return RedirectToAction("Index", "Main");
             }
@@ -191,5 +192,12 @@ namespace ECommerce.Controllers
                 return RedirectToAction("ViewAllProducts", "Products");
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAllProductsForCategory(int CategoryId)
+        {
+            var products = await _productsCategory.GetAllProductsForCategory(CategoryId);
+            return View(products);
+        }
+
     }
 }

@@ -1,0 +1,36 @@
+﻿@model List<ECommerce.Models.ProductsCategory>
+
+@{
+    ViewData["Title"] = "GetAllProductsForCategory";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h1>Products for Selected Category</h1>
+
+<div class="row">
+    @foreach (var productCategory in Model)
+    {
+        <div class="col-md-4">
+            @if (productCategory.product.ImageUri != null)
+            {
+                <img src="@productCategory.product.ImageUri" alt="Product Image"  class="product-image" width="200" height="200" />
+            }
+            else
+            {
+                <p>No Image Available</p>
+            }                <div class="card-body">
+                <h4 class="card-title">@productCategory.product.ProductName</h4>
+                <p class="card-text">@productCategory.product.Description</p>
+                <p class="card-text">$@productCategory.product.Price</p>
+            </div>
+            <a asp-controller="Products" asp-action="Details" asp-route-id="@productCategory.product.Id">Details</a>
+
+        </div>
+ 
+
+    }
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

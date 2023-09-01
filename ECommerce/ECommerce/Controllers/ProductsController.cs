@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ECommerce.Models;
 using ECommerce.Models.Interfaces;
+using System.ComponentModel;
+using System.Configuration;
 
 namespace ECommerce.Controllers
 {
@@ -16,16 +18,63 @@ namespace ECommerce.Controllers
         public ProductsController(ApplicationDbContext context, IProduct Product)
         {
             _context = context;
-            _Product= Product;
+            _Product = Product;
 
+        }
+        public async Task<IActionResult> FilterProducts(string filter)
+        {
+            IQueryable<Product> query = _context.products;
+
+            switch (filter)
+            {
+                case "HighToLowPrice":
+                    query = query.OrderByDescending(p => p.Price);
+                    break;
+
+                case "LowToHighPrice":
+                    query = query.OrderBy(p => p.Price);
+                    break;
+
+                case "OrderByAlphaBetAsend":
+                    query = query.OrderBy(p => p.ProductName);
+                    break;
+
+                case "OrderByAlphaBetDesend":
+                    query = query.OrderByDescending(p => p.ProductName);
+                    break;
+
+                default:
+                    break;
+            }
+
+            var products = await query.ToListAsync();
+            return View(products);
         }
 
 
         //[Authorize (Roles ="Abdelrahman")]
+        [HttpGet]
         public async Task<IActionResult> ViewAllProducts()
         {
             return View(await _context.products.ToListAsync());
         }
+        [HttpPost]
+        public  IActionResult ViewAllProducts(string productname)
+        {
+            
+            HttpContext.Session.SetString("productname", productname);
+            return RedirectToAction("Rows");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Rows()
+        {
+            string productTrg = HttpContext.Session.GetString("productname");
+            var rows = _context.products.Where(x => x.ProductName.Contains(productTrg));
+            return View(await rows.ToListAsync());
+        }
+
 
         // GET: BookModels/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -44,6 +93,11 @@ namespace ECommerce.Controllers
 
             return View(product);
         }
+      
+
+       
+
+      
 
         // GET: BookModels/Create
         [Authorize]
@@ -58,8 +112,7 @@ namespace ECommerce.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
+                await _Product.Create(product);
                 return RedirectToAction("ViewAllProducts", "Products");
             }
             return View(product);
@@ -83,7 +136,7 @@ namespace ECommerce.Controllers
         }
 
 
-      
+
         // POST: BookModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -145,12 +198,40 @@ namespace ECommerce.Controllers
             var product = await _context.products.FindAsync(id);
             _context.products.Remove(product);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("ViewAllProducts", "Products");
         }
 
         private bool ProductExists(int id)
         {
             return _context.products.Any(e => e.Id == id);
+        }
+        [HttpGet]
+        public IActionResult AddCategoryToProduct(int ProductId)
+        {
+            ProductsCategory categoryProduct = new ProductsCategory()
+            {
+                ProductId = ProductId
+            };
+            ViewBag.Categories = _context.categories.ToList();
+            return View(categoryProduct);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCategoryToProduct(ProductsCategory categoryProduct)
+        {
+            if (ModelState.IsValid)
+            {
+                await _Product.AddCategoryToProduct(categoryProduct.CategoryId, categoryProduct.ProductId);
+                
+
+                return RedirectToAction("Index", "Main");
+            }
+            else
+            {
+                return RedirectToAction("ViewAllProducts", "Products");
+            }
+
         }
     }
 }

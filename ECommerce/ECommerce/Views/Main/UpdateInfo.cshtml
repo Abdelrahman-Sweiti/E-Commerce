@@ -1,0 +1,49 @@
+﻿@model ECommerce.Models.UpdataInfoModel
+
+@{
+    ViewData["Title"] = "UpdateInfo";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h1>UpdateInfo</h1>
+
+<form method="post">
+    <table>
+
+
+        <tr>
+            <td> Current First Name : @User.FindFirst("UserFirstName").Value</td>
+            <td> <input asp-controller="Account" asp-action="UpdateInfo" asp-for="FirstName" type="text" /></td>
+        </tr>
+        <tr>
+            <td>Current Last Name : @User.FindFirst("UserLastName").Value</td>
+            <td><input asp-controller="Account" asp-action="UpdateInfo" asp-for="LastName" type="text" /></td>
+        </tr>
+        <tr>
+            <td> Current Gender : @User.FindFirst("Gender").Value</td>
+            <td><input asp-controller="Account" asp-action="UpdateInfo" asp-for="Gender" type="text" /></td>
+        </tr>
+
+
+
+
+        <tr>
+            <td><input asp-controller="Main" asp-action="UpdateInfo" value="UpdateInfos" type="submit" class="btn btn-outline-success" /></td>
+
+        </tr>
+
+    </table>
+
+
+
+
+    <h1 class="text-success">@ViewBag.succ</h1>
+
+
+
+
+
+
+
+
+</form>

@@ -17,7 +17,7 @@ namespace ECommerce
             builder.Services.AddRazorPages();
 
             builder.Services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-
+            builder.Services.AddSession();
             string connString = builder.Configuration.GetConnectionString("DefaultConnection");
 
             builder.Services
@@ -37,6 +37,7 @@ namespace ECommerce
             builder.Services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
             builder.Services.AddTransient<IProduct, ProductService>();
             builder.Services.AddTransient<ICategory, CategoryService>();
+            builder.Services.AddTransient<IProductsCategory, ProductsCategoryService>();
 
 
             var app = builder.Build();
@@ -44,14 +45,14 @@ namespace ECommerce
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Main/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

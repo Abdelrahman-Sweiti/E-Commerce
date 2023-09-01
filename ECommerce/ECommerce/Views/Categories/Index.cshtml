@@ -36,6 +36,8 @@
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 <a class="btn btn-primary btn-lg" style="font-size: 15px; " asp-controller="Categories" asp-action="AddProductToCategories" asp-route-CategoryId="@item.Id">  Add Product To Category</a>
+                    <a class="btn btn-primary btn-lg" style="font-size: 15px; " asp-controller="Categories" asp-action="GetAllProductsForCategory" asp-route-CategoryId="@item.Id">View All Products</a>
+
             </td>
         </tr>
 }
