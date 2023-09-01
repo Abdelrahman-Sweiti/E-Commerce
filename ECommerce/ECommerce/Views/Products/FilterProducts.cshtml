@@ -1,24 +1,14 @@
-﻿@model IEnumerable<ECommerce.Models.Product>
+﻿@model List<ECommerce.Models.Product>
 
 @{
-    ViewData["Title"] = "ViewAllProducts";
+    ViewData["Title"] = "FilterProducts";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
 <link rel="stylesheet" href="~/css/AdminViewProducts.css" />
-<link rel="stylesheet" href="~/css/AccIndex.css" />
 
+<h1>Filtered Products</h1>
 
-<h1>All Products in the Database</h1>
-<div class="Search-box" id="BookExp">
-<form method="post">
-
-    <input class="bar1" type="text" asp-controller="Products" asp-action="rows" name="productname" placeholder="Search for a product" />
-
-    <input class="bar2" type="submit" value="Search" />
-
-</form>
-</div>
 <div class="product-container">
     @foreach (var item in Model)
     {
@@ -26,9 +16,9 @@
             <h2 class="product-title">@item.ProductName</h2>
             <p class="product-price">@item.Price</p>
             <p class="product-description">@item.Description</p>
-            @if (item.ImageUri != null)
+            @if (!string.IsNullOrEmpty(item.ImageUri))
             {
-                <img src="@item.ImageUri" alt="@item.ProductName" class="product-image" width="200" height="200"/>
+                <img src="@item.ImageUri" alt="@item.ProductName" class="product-image" width="200" height="200" />
             }
             else
             {
@@ -43,6 +33,9 @@
     }
 </div>
 
+<div>
+    <a asp-action="ViewAllProducts">Back to All Products</a>
+</div>
 <div class="filter-buttons">
     <a asp-action="FilterProducts" asp-route-filter="HighToLowPrice" class="btn btn-secondary">High to Low Price</a>
     <a asp-action="FilterProducts" asp-route-filter="LowToHighPrice" class="btn btn-secondary">Low to High Price</a>

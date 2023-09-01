@@ -18,7 +18,7 @@ namespace ECommerce.Models.Services
 
         }
 
-        public async Task<Product> Create(Product product  )
+        public async Task<Product> Create(Product product)
         {
 
          
@@ -27,6 +27,23 @@ namespace ECommerce.Models.Services
             return product;
         }
 
+        public async Task<ProductsCategory> AddCategoryToProduct(int categoryId, int productId)
+        {
+
+
+
+            ProductsCategory categoryProduct = new ProductsCategory()
+            {
+                ProductId = productId,
+                CategoryId = categoryId
+            };
+
+            _context.Entry(categoryProduct).State = EntityState.Added;
+
+            await _context.SaveChangesAsync();
+
+            return categoryProduct;
+        }
 
         public async Task<Uri> GetFile(IFormFile file)
         {
