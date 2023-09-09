@@ -1,9 +1,11 @@
 ﻿using ECommerce.Data;
 using ECommerce.Models;
+using ECommerce.Models.DTOs;
 using ECommerce.Models.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Security.Claims;
 
 namespace ECommerce.Controllers
@@ -42,22 +44,21 @@ namespace ECommerce.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> Login(SignInModel signInModel)
+        public async Task<IActionResult> Login(LoginDTO login)
         {
-            if (ModelState.IsValid)
+            var user = await _user.Authenticate(login.Username, login.Password);
+            if (user == null)
             {
-                var result = await _user.PasswordSignInAsync(signInModel);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index", "Main");
-                }
-
-                ModelState.AddModelError("", "Invalid information");
-
+                ModelState.AddModelError(string.Empty, "Username or password is incorrect.");
+                return View("Login", login);
             }
-
-            return View();
+            else
+            {
+                return RedirectToAction("Index", "Main");
+            }
         }
+
+
 
         [HttpGet]
         [Route("Register")]
@@ -69,40 +70,27 @@ namespace ECommerce.Controllers
 
         [HttpPost]
         [Route("Register")]
-        public async Task<IActionResult> Register(RegisterViewModel usermodel)
+        public async Task<ActionResult<UserDTO>> Register(RegisterUserDTO register)
         {
+            var user = await _user.Register(register, this.ModelState);
             if (ModelState.IsValid)
             {
 
+                return RedirectToAction("Index", "Main");
+            }
+            else
+            {
+                return View("Register", register);
 
-                var result = await _user.CreateUserAsync(usermodel);
-
-                if (!result.Succeeded)
-                {
-                    foreach (var errormessage in result.Errors)
-                    {
-                        ModelState.AddModelError("", errormessage.Description);
-                    }
-                    return View(usermodel);
-
-                }
-
-
-                ModelState.Clear();
-            };
-
-
-            return View();
+            }
 
         }
 
         [Route("Logout")]
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> LogOut()
         {
-
-            await _user.SignOutAsync();
+            await _user.LogOut();
             return RedirectToAction("Index", "Main");
-
         }
 
 
@@ -115,7 +103,15 @@ namespace ECommerce.Controllers
             return View();
         }
 
+        public void SetCookie(string v1, string v2)
+        {
+            throw new NotImplementedException();
+        }
 
+        public Task<ActionResult<UserDTO>> Register(RegisterUserDTO registerDTO, ModelStateDictionary modelState)
+        {
+            throw new NotImplementedException();
+        }
 
         [HttpGet]
         public IActionResult UpdateInfo()

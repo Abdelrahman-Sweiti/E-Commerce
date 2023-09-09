@@ -1,4 +1,4 @@
-﻿@model ECommerce.Models.RegisterViewModel
+﻿@model ECommerce.Models.DTOs.RegisterUserDTO
 
 @{
     ViewData["Title"] = "Register";
@@ -43,6 +43,21 @@
                 <label asp-for="Email"></label>
                 <input asp-for="Email" autocomplete="off" />
                 <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="field">
+
+                <label asp-for="Roles"></label>
+                <input asp-for="Roles" autocomplete="off" />
+                <span asp-validation-for="Roles" class="text-danger"></span>
+            </div>
+
+
+            <div class="field">
+
+                <label asp-for="Image"></label>
+                <input asp-for="Image" autocomplete="off" />
+                <span asp-validation-for="Image" class="text-danger"></span>
             </div>
 
             <div class="field">

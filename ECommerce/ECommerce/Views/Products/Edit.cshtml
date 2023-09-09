@@ -5,42 +5,49 @@
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
-<h1>Edit</h1>
+<link rel="stylesheet" href="~/css/ProdEdit.css" />
 
-<h4>Product</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="ProductName" class="control-label"></label>
-                <input asp-for="ProductName" class="form-control" />
-                <span asp-validation-for="ProductName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageUri" class="control-label">Image</label>
-                <input asp-for="ImageUri"  class="form-control-file" />
-                <span asp-validation-for="ImageUri" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+
+<div class="container mt-5">
+    <h1 class="text-center">Edit Product</h1>
+    <hr />
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 glass-effect p-4">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label for="inputProductName">Product Name</label>
+                    <input asp-for="ProductName" class="form-control" id="inputProductName" placeholder="Product Name">
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPrice">Price</label>
+                    <input asp-for="Price" class="form-control" id="inputPrice" placeholder="Price">
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputDescription">Description</label>
+                    <input asp-for="Description" class="form-control" id="inputDescription" placeholder="Description">
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputImageUri">Image</label>
+                    <input asp-for="ImageUri" class="form-control col-md-12" id="inputImageUri">
+                    <span asp-validation-for="ImageUri" class="text-danger"></span>
+                </div>
+
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a asp-controller="Products" asp-action="ViewAllProducts" class="btn btn-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-controller="Products"asp-action="ViewAllProducts">Back to List</a>
-</div>

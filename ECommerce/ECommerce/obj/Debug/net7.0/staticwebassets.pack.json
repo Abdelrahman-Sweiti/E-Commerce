@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\ECommerce.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\DeleteCategory.css",
+      "PackagePath": "staticwebassets\\DeleteCategory.css"
+    },
+    {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\Images\\Arrival.png",
       "PackagePath": "staticwebassets\\Images\\Arrival.png"
     },
@@ -113,12 +117,44 @@
       "PackagePath": "staticwebassets\\css\\AccIndex.css"
     },
     {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\AddProductCSS.css",
+      "PackagePath": "staticwebassets\\css\\AddProductCSS.css"
+    },
+    {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\AdminViewProducts.css",
       "PackagePath": "staticwebassets\\css\\AdminViewProducts.css"
     },
     {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\BookReg.css",
       "PackagePath": "staticwebassets\\css\\BookReg.css"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\CardStyling.css",
+      "PackagePath": "staticwebassets\\css\\CardStyling.css"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\CateToProduct.css",
+      "PackagePath": "staticwebassets\\css\\CateToProduct.css"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\CategoryIndex.css",
+      "PackagePath": "staticwebassets\\css\\CategoryIndex.css"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\CreateCategory.css",
+      "PackagePath": "staticwebassets\\css\\CreateCategory.css"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\DeleteCategory.css",
+      "PackagePath": "staticwebassets\\css\\DeleteCategory.css"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\DetailsCategory.css",
+      "PackagePath": "staticwebassets\\css\\DetailsCategory.css"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\EditCategory.css",
+      "PackagePath": "staticwebassets\\css\\EditCategory.css"
     },
     {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\LayoutStyle1.css",
@@ -131,6 +167,22 @@
     {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\LogIn.css",
       "PackagePath": "staticwebassets\\css\\LogIn.css"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\ProdDelete.css",
+      "PackagePath": "staticwebassets\\css\\ProdDelete.css"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\ProdDetails.css",
+      "PackagePath": "staticwebassets\\css\\ProdDetails.css"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\ProdEdit.css",
+      "PackagePath": "staticwebassets\\css\\ProdEdit.css"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\ProdToCategory.css",
+      "PackagePath": "staticwebassets\\css\\ProdToCategory.css"
     },
     {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\RegForm.css",

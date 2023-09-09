@@ -5,48 +5,50 @@
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
-<h1>Add Product to Categories</h1>
+<link rel="stylesheet" href="~/css/CateToProduct.css" />
 
-<h4>ProductsCategory</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="AddProductToCategories" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="container mt-5">
+    <div class="row justify-content-center ">
+        <div class="col-md-6 ">
+            <!-- Center the card both vertically and horizontally -->
+            <div class="card glass-effect text-light">
+                <div class="card-body">
+                    <h4 class="card-title text-center">Add New Product to @ViewData["CategoryName"] Category</h4>
 
-            <div class="form-group">
-                <input hidden asp-for="CategoryId" />
+                    <form asp-action="AddProductToCategories" method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="form-group">
+                            <input hidden asp-for="CategoryId" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ProductName">Name</label>
+                            <input asp-for="product.ProductName" class="form-control" id="ProductName">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Price">Price</label>
+                            <input asp-for="product.Price" class="form-control" id="Price">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Description">Description</label>
+                            <input asp-for="product.Description" class="form-control" id="Description">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ImageUri">Image</label>
+                            <input asp-for="product.ImageUri" class="form-control" id="ImageUri">
+                        </div>
+
+                        <div class="form-group text-center mt-3">
+                            <button type="submit" class="btn btn-primary m-1">Create</button> |
+                            <a asp-action="Index" class="btn btn-secondary m-1">Back to List</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-           
-            
-
-            <div class="form-group">
-                <label asp-for="product.ProductName" class="control-label">Name</label>
-                <input asp-for="product.ProductName" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="product.Price" class="control-label">Price</label>
-                <input asp-for="product.Price" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="product.Description" class="control-label">Description</label>
-                <input asp-for="product.Description" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="product.ImageUri" class="control-label">Image</label>
-                <input asp-for="product.ImageUri" class="form-control-file" />
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>

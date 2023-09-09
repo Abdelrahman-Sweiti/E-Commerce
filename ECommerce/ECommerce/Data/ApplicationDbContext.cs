@@ -18,6 +18,10 @@ namespace ECommerce.Data
             base.OnModelCreating(modelBuilder);
 
 
+            SeedRole(modelBuilder, "Admin");
+            SeedRole(modelBuilder, "Editor");
+            SeedRole(modelBuilder, "Users");
+
             modelBuilder.Entity<ProductsCart>().HasKey(
                ProductsCart => new
                {
@@ -44,10 +48,24 @@ namespace ECommerce.Data
                    ProductsOrder.ProductId
                }
                );
+
         }
+        private void SeedRole(ModelBuilder modelBuilder, string roleName)
+        {
+            var role = new IdentityRole
+            {
+                Id = roleName.ToLower(),
+                Name = roleName,
+                NormalizedName = roleName.ToUpper(),
+                ConcurrencyStamp = Guid.Empty.ToString()
+            };
+            modelBuilder.Entity<IdentityRole>().HasData(role);
+        }
+      
+    
 
 
-        public DbSet<Product> products { get; set; }
+    public DbSet<Product> products { get; set; }
         public DbSet<Cart> carts { get; set; }
         public DbSet<Category> categories { get; set; }
         public DbSet<ProductsCart> ProductsCarts { get; set; }

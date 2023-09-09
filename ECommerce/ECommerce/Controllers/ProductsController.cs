@@ -85,7 +85,10 @@ namespace ECommerce.Controllers
             }
 
             var product = await _context.products
+                .Include(p => p.productsCategories) // Include the related categories
+                .ThenInclude(pc => pc.category)      // Include the category details
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (product == null)
             {
                 return NotFound();
@@ -93,11 +96,12 @@ namespace ECommerce.Controllers
 
             return View(product);
         }
-      
 
-       
 
-      
+
+
+
+
 
         // GET: BookModels/Create
         [Authorize]

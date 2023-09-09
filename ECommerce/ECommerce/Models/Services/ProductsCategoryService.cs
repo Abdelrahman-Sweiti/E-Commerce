@@ -26,5 +26,12 @@ namespace ECommerce.Models.Services
         }
 
 
+        public async Task<ProductsCategory> GetProductCategoryById(int id)
+        {
+            var productCategory = await _context.productsCategories.FirstOrDefaultAsync(x => x.CategoryId == id);
+            return productCategory;
+        }
+
+
     }
 }
