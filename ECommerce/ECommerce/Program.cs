@@ -2,8 +2,12 @@ using ECommerce.Data;
 using ECommerce.Models;
 using ECommerce.Models.Interfaces;
 using ECommerce.Models.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace ECommerce
 {
@@ -21,17 +25,14 @@ namespace ECommerce
             string connString = builder.Configuration.GetConnectionString("DefaultConnection");
 
             builder.Services
-                .AddDbContext<ApplicationDbContext>
-            (opions => opions.UseSqlServer(connString));
+                .AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connString));
             builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;
-
             }).AddEntityFrameworkStores<ApplicationDbContext>();
-
 
             builder.Services.AddTransient<IUser, IdentityUserService>();
             builder.Services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
@@ -39,6 +40,20 @@ namespace ECommerce
             builder.Services.AddTransient<ICategory, CategoryService>();
             builder.Services.AddTransient<IProductsCategory, ProductsCategoryService>();
 
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.Cookie.Name = "AuthCookieECommerce"; // Replace with your preferred name
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Set the expiration time
+                    options.SlidingExpiration = true; // Extend the expiration time on each request
+                    // Other options...
+                });
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+                options.LoginPath = "/Main/Login";
+            });
 
             var app = builder.Build();
 

@@ -1,9 +1,14 @@
-﻿namespace ECommerce.Models
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace ECommerce.Models
 {
     public class Product
     {
         public int Id { get; set; }
+        [DisplayName("Product Name")]
         public string ProductName { get; set; }
+        [Display(Name = "Image URL")]
         public string? ImageUri { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }

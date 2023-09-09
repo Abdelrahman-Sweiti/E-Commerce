@@ -20,6 +20,12 @@ namespace ECommerce.Models.Services
             return await _context.categories.Include(x => x.productsCategories).ThenInclude(y => y.product).ToListAsync();
         }
 
+        public async Task<Category> GetCategoryById(int id)
+        {
+            var category = await _context.categories.FirstOrDefaultAsync(x=>x.Id==id);
+            return category;
+        }
+
         public async Task<Product> AddProductToCategories(int categoryId, Product product)
         {
 

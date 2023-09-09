@@ -167,15 +167,25 @@ namespace ECommerce.Controllers
         }
 
 
-        public IActionResult AddProductToCategories(int CategoryId)
+        public async Task<IActionResult> AddProductToCategories(int CategoryId)
         {
-            ProductsCategory categoryProduct = new ProductsCategory()
+            var category = await _Category.GetCategoryById(CategoryId);
+
+            if (category == null)
+            {
+                return NotFound(); // Handle the case where the category is not found.
+            }
+
+            var categoryProduct = new ProductsCategory()
             {
                 CategoryId = CategoryId
             };
 
+            ViewData["CategoryName"] = category.Name; // Pass the category name to the view using ViewData.
+
             return View(categoryProduct);
         }
+
 
 
         [HttpPost]
@@ -195,9 +205,20 @@ namespace ECommerce.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllProductsForCategory(int CategoryId)
         {
+            var category = await _Category.GetCategoryById(CategoryId);
             var products = await _productsCategory.GetAllProductsForCategory(CategoryId);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+            ViewData["CategoryName"] = category.Name;
+
             return View(products);
         }
+
+
+
 
     }
 }

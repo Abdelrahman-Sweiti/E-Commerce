@@ -1,4 +1,4 @@
-﻿@model ECommerce.Models.SignInModel
+﻿@model ECommerce.Models.DTOs.LoginDTO
 
 @{
     ViewData["Title"] = "Login";
@@ -15,8 +15,8 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <h2>Sign in</h2>
         <div class="inputBox">
-            <input type="text" required="required" asp-for="Email">
-            <span asp-validation-for="Email" class="text-danger"></span>
+            <input type="text" required="required" asp-for="Username">
+            <span asp-validation-for="Username" class="text-danger"></span>
             <span>Userame</span>
             <i></i>
         </div>

@@ -5,42 +5,49 @@
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 
-<h1>Create</h1>
+<link rel="stylesheet" href="~/css/AddProductCSS.css" />
 
-<h4>Product</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ProductName" class="control-label"></label>
-                <input asp-for="ProductName" class="form-control" />
-                <span asp-validation-for="ProductName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageUri" class="control-label"></label>
-                <input asp-for="ImageUri" class="form-control" />
-                <span asp-validation-for="ImageUri" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form asp-action="Create" class="border rounded p-4 border-dark">
+                <h2 class="text-center">Create Product</h2>
+                <hr>
+
+                <div class="form-group">
+                    <label for="inputProductName">Product Name</label>
+                    <input asp-for="ProductName" class="form-control text-black" id="inputProductName" placeholder="Product Name">
+                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPrice">Price</label>
+                    <input asp-for="Price" class="form-control" id="inputPrice" placeholder="Price">
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputImageUri">Image URI</label>
+                    <input asp-for="ImageUri" class="form-control" id="inputImageUri" placeholder="Image URI">
+                    <span asp-validation-for="ImageUri" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <!-- Added margin to this form group -->
+                    <label for="inputDescription">Description</label>
+                    <textarea asp-for="Description" class="form-control" id="inputDescription" placeholder="Description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary">Create</button>
+                    <a asp-controller="Products" asp-action="ViewAllProducts" class="btn btn-outline-secondary">Back to List</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 

@@ -13,7 +13,7 @@ namespace ECommerce.Models
         [Required]
         public string Gender { get; set; }
 
-        public byte[]? Image { get; set; }
+        public string Image { get; set; }
 
 
 
