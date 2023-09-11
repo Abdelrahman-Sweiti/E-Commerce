@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "k15r+YcQbhud1t8H7cQi7f7nSHIbCeCUgKDeiSLUqu4=",
+  "Hash": "ccO/SHTzWjY4bwpB9HyFHT5Rb91Li9URf8JAeOCq++U=",
   "Source": "ECommerce",
   "BasePath": "_content/ECommerce",
   "Mode": "Default",
@@ -1377,6 +1377,23 @@
       "OriginalItemSpec": "wwwroot\\css\\ProdToCategory.css"
     },
     {
+      "Identity": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\Profile.css",
+      "SourceId": "ECommerce",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\",
+      "BasePath": "_content/ECommerce",
+      "RelativePath": "css/Profile.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Profile.css"
+    },
+    {
       "Identity": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\RegForm.css",
       "SourceId": "ECommerce",
       "SourceType": "Discovered",
@@ -1409,6 +1426,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\RowsStyle.css"
+    },
+    {
+      "Identity": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\UpdateInfo.css",
+      "SourceId": "ECommerce",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\",
+      "BasePath": "_content/ECommerce",
+      "RelativePath": "css/UpdateInfo.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\UpdateInfo.css"
     },
     {
       "Identity": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\DeleteCategory.css",

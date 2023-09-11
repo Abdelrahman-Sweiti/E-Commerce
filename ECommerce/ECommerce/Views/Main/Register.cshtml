@@ -7,79 +7,84 @@
 
 <link rel="stylesheet" href="~/css/RegForm.css" />
 
+<video id="video-bg" autoplay muted loop>
+    <source src="~/Images/Tokyo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
 
-<video src="~/Images/Tokyo.mp4" muted autoplay loop></video>
 
-
-<div class="Full">
-    <div class="FullBox">
-        <form asp-action="Register">
+<div class="glass">
+    <div class="container">
+        <form asp-action="Register" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="field">
-                <label asp-for="FirstName"></label>
-                <input asp-for="FirstName" autocomplete="off" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group field">
+                        <label asp-for="FirstName">First Name</label>
+                        <input asp-for="FirstName" class="form-control" required />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group field">
+                        <label asp-for="LastName">Last Name</label>
+                        <input asp-for="LastName" class="form-control" required />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group field">
+                        <label asp-for="Roles">Roles</label>
+                        <input asp-for="Roles" class="form-control" required />
+                        <span asp-validation-for="Roles" class="text-danger"></span>
+                    </div>
+                </div>
 
-            <div class="field">
-                <label asp-for="LastName"></label>
-                <input asp-for="LastName" autocomplete="off" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+                <div class="col-md-6">
+                    <div class="form-group field">
+                        <label asp-for="Gender">Gender</label>
+                        <input asp-for="Gender" class="form-control" required />
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
 
-            <div class="field">
-
-                <label asp-for="Gender"></label>
-                <input asp-for="Gender" autocomplete="off" />
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-
-
-           
-
-            <div class="field">
-
-                <label asp-for="Email"></label>
-                <input asp-for="Email" autocomplete="off" />
+            <div class="form-group field">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" class="form-control" required />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
-            <div class="field">
-
-                <label asp-for="Roles"></label>
-                <input asp-for="Roles" autocomplete="off" />
-                <span asp-validation-for="Roles" class="text-danger"></span>
-            </div>
-
-
-            <div class="field">
-
-                <label asp-for="Image"></label>
-                <input asp-for="Image" autocomplete="off" />
+            <div class="form-group field">
+                <label asp-for="Image">Image</label>
+                <input asp-for="Image" class="form-control" required />
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
 
-            <div class="field">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group field">
+                        <label asp-for="Password">Password</label>
+                        <input asp-for="Password" class="form-control" type="password" required />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
 
-                <label asp-for="Password"></label>
-                <input asp-for="Password" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <div class="col-md-6">
+                    <div class="form-group field">
+                        <label asp-for="ConfirmPassword">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" class="form-control" type="password" required />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
 
-            <div class="field">
-
-                <label asp-for="ConfirmPassword"></label>
-                <input asp-for="ConfirmPassword" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-
-            </div>
-
-            <input type="submit" value="Signup" class="btn1" />
-
-
+            <button type="submit" class="btn btn-primary subtn">Sign Up</button>
         </form>
     </div>
 </div>
-
-
