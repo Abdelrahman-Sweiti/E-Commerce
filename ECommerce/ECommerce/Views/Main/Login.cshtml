@@ -10,8 +10,8 @@
 
 
 
-<div class="box">
-    <form asp-action="Login">
+<div class="box fade-in">
+    <form asp-action="Login" class="">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <h2>Sign in</h2>
         <div class="inputBox">
@@ -28,7 +28,7 @@
         </div>
         <div class="links">
             <a href="#">Forgot Password ?</a>
-            <a asp-controller="Account" asp-action="Register">Signup</a>
+            <a asp-controller="Main" asp-action="Register">Signup</a>
         </div>
         <input type="submit" value="Login">
     </form>

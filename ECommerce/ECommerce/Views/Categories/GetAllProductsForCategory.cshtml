@@ -27,8 +27,11 @@
                         <h5 class="card-title">@productCategory.product.ProductName</h5>
                         <p class="card-text">@productCategory.product.Description</p>
                         <p class="card-text">$@productCategory.product.Price</p>
-                        <a asp-action="Edit" asp-route-id="@productCategory.product.Id" class="btn btn-primary">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@productCategory.product.Id" class="btn btn-danger">Delete</a>
+                       @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@productCategory.product.Id" class="btn btn-primary">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@productCategory.product.Id" class="btn btn-danger">Delete</a>
+                        }
                     </div>
                 </div>
             </a>

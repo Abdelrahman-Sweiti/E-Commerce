@@ -23,6 +23,7 @@ namespace ECommerce.Models.Interfaces
             identity.AddClaim(new Claim("UserLastName", user.LastName ?? ""));
             identity.AddClaim(new Claim("Gender", user.Gender ?? ""));
             identity.AddClaim(new Claim("Email", user.Email ?? ""));
+            identity.AddClaim(new Claim("Image", user.Image ?? ""));
 
 
             return identity;

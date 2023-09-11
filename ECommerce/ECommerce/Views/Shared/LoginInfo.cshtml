@@ -6,9 +6,9 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
                data-bs-toggle="dropdown" aria-expanded="false">
-                Hello @(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserlastName").Value)
+                Hello @(User.FindFirst("UserFirstName").Value + " " + User.FindFirst("UserLastName").Value)
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <ul class="dropdown-menu custom-dropdown" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" asp-controller="Main" asp-action="Profile">Profile</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" asp-controller="Main" asp-action="Logout">Logout</a></li>
@@ -25,4 +25,3 @@
         </li>
     }
 </ul>
-        

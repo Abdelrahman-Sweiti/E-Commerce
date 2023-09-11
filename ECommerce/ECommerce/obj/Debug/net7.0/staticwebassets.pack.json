@@ -185,12 +185,20 @@
       "PackagePath": "staticwebassets\\css\\ProdToCategory.css"
     },
     {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\Profile.css",
+      "PackagePath": "staticwebassets\\css\\Profile.css"
+    },
+    {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\RegForm.css",
       "PackagePath": "staticwebassets\\css\\RegForm.css"
     },
     {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\RowsStyle.css",
       "PackagePath": "staticwebassets\\css\\RowsStyle.css"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\UpdateInfo.css",
+      "PackagePath": "staticwebassets\\css\\UpdateInfo.css"
     },
     {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\favicon.ico",

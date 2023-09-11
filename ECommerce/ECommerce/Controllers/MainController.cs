@@ -75,16 +75,18 @@ namespace ECommerce.Controllers
             var user = await _user.Register(register, this.ModelState);
             if (ModelState.IsValid)
             {
-
                 return RedirectToAction("Index", "Main");
             }
             else
             {
+                // Set an error message in ViewData
+                ViewData["ErrorMessage"] = "There was an error in the registration process. Please check your inputs.";
+
+                // Return the view with the error message
                 return View("Register", register);
-
             }
-
         }
+
 
         [Route("Logout")]
         public async Task<IActionResult> LogOut()
@@ -146,6 +148,11 @@ namespace ECommerce.Controllers
                 user.Gender = model.Gender;
             }
 
+            if (!string.IsNullOrEmpty(model.Image))
+            {
+                user.Image = model.Image;
+            }
+
             var result = await _userManager.UpdateAsync(user);
 
             if (result.Succeeded)
@@ -194,6 +201,17 @@ namespace ECommerce.Controllers
                     }
                 }
 
+                if (!string.IsNullOrEmpty(model.Image))
+                {
+                    var imageClaim = claims.FirstOrDefault(c => c.Type == "Image");
+                    if (imageClaim != null)
+                    {
+                        await _userManager.RemoveClaimAsync(user, User.FindFirst("Image"));
+                        await _userManager.AddClaimAsync(user, new Claim("Image", model.Image));
+                        await _userManager.ReplaceClaimAsync(user, imageClaim, new Claim("Image", user.Image));
+                    }
+                }
+
                 ViewBag.succ = "Update Successful";
                 return RedirectToAction("UpdateInfo");
             }
@@ -202,6 +220,7 @@ namespace ECommerce.Controllers
                 return View();
             }
         }
+
 
     }
 }

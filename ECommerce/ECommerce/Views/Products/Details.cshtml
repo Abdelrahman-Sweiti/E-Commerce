@@ -43,16 +43,20 @@
                     </ul>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-4">
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                <div class="row">
+                    <div class="col-sm-4">
                     <h5>Actions</h5>
                 </div>
-                <div class="col-sm-8">
-                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary">Edit</a>
-                    <a asp-action="ViewAllProducts" class="btn btn-outline-secondary">Back to List</a>
-                    <a asp-action="AddCategoryToProduct" asp-route-ProductId="@Model.Id" class="btn btn-outline-info">Add to Category</a>
-                </div>
-            </div>
+               
+                    <div class="col-sm-8">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary">Edit</a>
+                        <a asp-action="ViewAllProducts" class="btn btn-outline-secondary">Back to List</a>
+                        <a asp-action="AddCategoryToProduct" asp-route-ProductId="@Model.Id" class="btn btn-outline-info">Add to Category</a>
+                    </div>
+                
+            </div> }
         </div>
         <div class="col-md-4 text-center">
             @if (Model.ImageUri != null)
