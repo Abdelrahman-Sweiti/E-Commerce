@@ -39,6 +39,9 @@ namespace ECommerce
             builder.Services.AddTransient<IProduct, ProductService>();
             builder.Services.AddTransient<ICategory, CategoryService>();
             builder.Services.AddTransient<IProductsCategory, ProductsCategoryService>();
+            builder.Services.AddTransient<ICart, CartService>();
+            builder.Services.AddTransient<IProductsCart, ProductsCartService>();
+
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>

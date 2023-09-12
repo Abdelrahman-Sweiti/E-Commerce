@@ -7,7 +7,7 @@
         public int Quantity { get; set; }
 
 
-        public Product product { get; set; }
-        public Cart cart { get; set; }
+        public Product? product { get; set; }
+        public Cart? cart { get; set; }
     }
 }

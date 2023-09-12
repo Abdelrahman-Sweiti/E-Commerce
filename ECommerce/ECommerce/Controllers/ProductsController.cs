@@ -6,6 +6,11 @@ using ECommerce.Models;
 using ECommerce.Models.Interfaces;
 using System.ComponentModel;
 using System.Configuration;
+using Azure.Storage.Blobs.Models;
+using Azure.Storage.Blobs;
+using Microsoft.Extensions.Configuration;
+using ECommerce.Models.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace ECommerce.Controllers
 {
@@ -13,14 +18,53 @@ namespace ECommerce.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IProduct _Product;
+        private readonly IConfiguration _configration;
+        private readonly IProductsCart _productsCart;
+        private readonly IUser _User;
+        private readonly ICart _cart;
 
 
-        public ProductsController(ApplicationDbContext context, IProduct Product)
+        public ProductsController(ApplicationDbContext context, IProduct Product, IConfiguration configration,IProductsCart productsCart, IUser user,ICart cart)
         {
             _context = context;
             _Product = Product;
+            _configration = configration;
+            _productsCart = productsCart;
+            _User = user;
+            _cart = cart;
 
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddToCart(int productId)
+        {
+            var user = await _User.GetUser(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Main"); // Redirect to login page if the user is not authenticated
+            }
+
+            var product = await _Product.GetProductById(productId);
+
+            if (product == null)
+            {
+                return NotFound(); // Handle the case where the product with the specified ID is not found
+            }
+
+            // Check if the user has an existing cart or create a new one
+            var cart = await _cart.GetOrCreateCartAsync(user.Id);
+
+            // Add the product to the cart
+            var quantity = 1; // You can adjust the quantity as needed
+            await _productsCart.AddProductToCartAsync(cart.Id, productId, quantity);
+
+            return RedirectToAction("Index", "Main"); // Redirect to the cart view or any other desired page
+        }
+
+
+
+
         public async Task<IActionResult> FilterProducts(string filter)
         {
             IQueryable<Product> query = _context.products;
@@ -52,7 +96,6 @@ namespace ECommerce.Controllers
         }
 
 
-        //[Authorize (Roles ="Abdelrahman")]
         [HttpGet]
         public async Task<IActionResult> ViewAllProducts()
         {
@@ -68,12 +111,18 @@ namespace ECommerce.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Rows()
+        public async Task<IActionResult> Rows(string productname)
         {
-            string productTrg = HttpContext.Session.GetString("productname");
-            var rows = _context.products.Where(x => x.ProductName.Contains(productTrg));
+            var rows = _context.products.AsQueryable();
+
+            if (!string.IsNullOrEmpty(productname))
+            {
+                rows = rows.Where(x => x.ProductName.Contains(productname));
+            }
+
             return View(await rows.ToListAsync());
         }
+
 
 
         // GET: BookModels/Details/5
@@ -105,6 +154,7 @@ namespace ECommerce.Controllers
 
         // GET: BookModels/Create
         [Authorize]
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -112,15 +162,22 @@ namespace ECommerce.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProductName,ImageUri,Price,Description")] Product product)
+        public async Task<IActionResult> Create(Product product, IFormFile file)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && file != null)
             {
+                // Upload the image to Azure Blob Storage and get the URI
+                await _Product.GetFile(file, product);
+
+                // Save the product to the database
                 await _Product.Create(product);
+
                 return RedirectToAction("ViewAllProducts", "Products");
             }
+
             return View(product);
         }
+
 
 
 
@@ -146,7 +203,7 @@ namespace ECommerce.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductName,ImageUri,Price,Description")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductName,ImageUri,Price,Description")] Product product, IFormFile file)
         {
             if (id != product.Id)
             {
@@ -157,6 +214,7 @@ namespace ECommerce.Controllers
             {
                 try
                 {
+                    await _Product.GetFile(file, product);
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
@@ -237,5 +295,8 @@ namespace ECommerce.Controllers
             }
 
         }
+
+        
+
     }
 }

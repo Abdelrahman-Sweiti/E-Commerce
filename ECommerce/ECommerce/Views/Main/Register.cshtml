@@ -15,7 +15,7 @@
 
 <div class="glass">
     <div class="container">
-        <form asp-action="Register" method="post">
+        <form asp-action="Register" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="row">
@@ -61,9 +61,8 @@
             </div>
 
             <div class="form-group field">
-                <label asp-for="Image">Image</label>
-                <input asp-for="Image" class="form-control" required />
-                <span asp-validation-for="Image" class="text-danger"></span>
+                <label for="file">Upload Image:</label>
+                <input type="file" id="file" name="file" class="form-control">
             </div>
 
             <div class="row">

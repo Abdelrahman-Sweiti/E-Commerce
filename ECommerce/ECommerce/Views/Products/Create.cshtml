@@ -11,7 +11,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form asp-action="Create" class="border rounded p-4 border-dark">
+            <form asp-action="Create" class="border rounded p-4 border-dark" enctype="multipart/form-data" method="post">
                 <h2 class="text-center">Create Product</h2>
                 <hr>
 
@@ -28,13 +28,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputImageUri">Image URI</label>
-                    <input asp-for="ImageUri" class="form-control" id="inputImageUri" placeholder="Image URI">
-                    <span asp-validation-for="ImageUri" class="text-danger"></span>
+                    <label for="file" >Upload Image:</label>
+                    <input type="file" id="file" name="file" class="form-control">
                 </div>
 
                 <div class="form-group mb-3">
-                    <!-- Added margin to this form group -->
                     <label for="inputDescription">Description</label>
                     <textarea asp-for="Description" class="form-control" id="inputDescription" placeholder="Description"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
@@ -48,6 +46,3 @@
         </div>
     </div>
 </div>
-
-
-

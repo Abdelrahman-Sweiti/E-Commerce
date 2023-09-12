@@ -8,7 +8,7 @@ namespace ECommerce.Models.Services
 {
     public class ProductService  : IProduct
     {
-        IConfiguration _configration;
+        private readonly IConfiguration _configration;
         private readonly ApplicationDbContext _context;
 
         public ProductService(ApplicationDbContext context, IConfiguration configration)
@@ -20,12 +20,22 @@ namespace ECommerce.Models.Services
 
         public async Task<Product> Create(Product product)
         {
-
-         
-            _context.Entry(product).State = EntityState.Added;
+            _context.Add(product);
             await _context.SaveChangesAsync();
             return product;
         }
+
+
+
+        public async Task<Product> GetProductById(int productId)
+        {
+            // You can use your DbContext or any other method to retrieve the product by its ID.
+            // Replace "YourDbContext" with your actual DbContext class.
+            var product = await _context.products.FindAsync(productId);
+
+            return product;
+        }
+
 
         public async Task<ProductsCategory> AddCategoryToProduct(int categoryId, int productId)
         {
@@ -45,14 +55,9 @@ namespace ECommerce.Models.Services
             return categoryProduct;
         }
 
-        public async Task<Uri> GetFile(IFormFile file)
+        public async Task<Product> GetFile(IFormFile file, Product product)
         {
-            if (file == null)
-            {
-                Uri defaultImg = new Uri("https://faststorestorage.blob.core.windows.net/images/DefaultIMG.png");
-                return defaultImg;
-            }
-            BlobContainerClient container = new BlobContainerClient(_configration.GetConnectionString("AzureBlob"), "images");
+            BlobContainerClient container = new BlobContainerClient(_configration.GetConnectionString("StorageConnection"), "images");
             await container.CreateIfNotExistsAsync();
             BlobClient blob = container.GetBlobClient(file.FileName);
 
@@ -61,12 +66,19 @@ namespace ECommerce.Models.Services
             {
                 HttpHeaders = new BlobHttpHeaders() { ContentType = file.ContentType }
             };
-            if (!blob.Exists())
+
+            if (!await blob.ExistsAsync())
             {
                 await blob.UploadAsync(stream, options);
             }
-            return blob.Uri;
 
+            product.ImageUri = blob.Uri.ToString();
+
+            return product;
         }
     }
+
+
+
 }
+

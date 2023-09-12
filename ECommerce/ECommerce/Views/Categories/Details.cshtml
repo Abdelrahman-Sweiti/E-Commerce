@@ -29,6 +29,19 @@
                     <dd class="col-sm-10">
                         @Html.DisplayFor(model => model.Description)
                     </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.CategoryCover)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @if (Model.CategoryCover != null)
+                        {
+                            <img src="@Model.CategoryCover" alt="@Model.CategoryCover" class="img-thumbnail" width="250" height="250"/>
+                        }
+                        else
+                        {
+                            <p>No Image Available</p>
+                        }
+                    </dd>
                 </dl>
             </div>
             <div class="text-center mt-3">

@@ -32,6 +32,14 @@
                             <a asp-action="Edit" asp-route-id="@productCategory.product.Id" class="btn btn-primary">Edit</a>
                             <a asp-action="Delete" asp-route-id="@productCategory.product.Id" class="btn btn-danger">Delete</a>
                         }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form method="post" asp-controller="Products" asp-action="AddToCart">
+                                <input type="hidden" name="productId" value="@productCategory.product.Id" />
+                                <button type="submit" class="btn btn-success">Add to Cart</button>
+                            </form>
+                        }
+                        
                     </div>
                 </div>
             </a>
@@ -39,8 +47,11 @@
     }
 </div>
 
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-action="Index" class="btn btn-secondary mt-4">Back to List</a>
+    </div>
+}
 
 
-<div>
-    <a asp-action="Index" class="btn btn-secondary mt-4">Back to List</a>
-</div>

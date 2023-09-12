@@ -17,23 +17,32 @@ namespace ECommerce.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext _context;
+        private readonly ICategory _Category;
 
-
-        public MainController(IUser user, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext context)
+        public MainController(IUser user, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext context, ICategory category)
         {
 
             _userManager = userManager;
             _signInManager = signInManager;
             _user = user;
             _context = context;
-
+            _Category = category;
         }
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var list1 = await _Category.GetCategories();
+
+            return View(list1);
         }
 
+        [HttpPost]
+        public IActionResult Index(string productname)
+        {
+            return RedirectToAction("Rows", "Products", new { productname });
+        }
+
+       
 
         [HttpGet]
         [Route("Login")]
@@ -70,22 +79,27 @@ namespace ECommerce.Controllers
 
         [HttpPost]
         [Route("Register")]
-        public async Task<ActionResult<UserDTO>> Register(RegisterUserDTO register)
+        public async Task<ActionResult<UserDTO>> Register(RegisterUserDTO register, IFormFile file)
         {
-            var user = await _user.Register(register, this.ModelState);
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Main");
-            }
-            else
-            {
-                // Set an error message in ViewData
-                ViewData["ErrorMessage"] = "There was an error in the registration process. Please check your inputs.";
+                var user = await _user.Register(register, this.ModelState, file);
 
-                // Return the view with the error message
-                return View("Register", register);
+                if (user != null)
+                {
+                    return RedirectToAction("Index", "Main");
+                }
+                else
+                {
+                    // Set an error message in ViewData
+                    ViewData["ErrorMessage"] = "There was an error in the registration process. Please check your inputs.";
+                }
             }
+
+            // If the model state is invalid or there was an error, return to the registration view
+            return View("Register", register);
         }
+
 
 
         [Route("Logout")]

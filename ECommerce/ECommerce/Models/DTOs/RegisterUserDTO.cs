@@ -14,7 +14,7 @@ namespace ECommerce.Models.DTOs
         [Required]
         public string Gender { get; set; }
 
-        public string Image { get; set; }
+        public string? Image { get; set; }
         public string? Roles { get; set; }
 
         public string Email { get; set; }
