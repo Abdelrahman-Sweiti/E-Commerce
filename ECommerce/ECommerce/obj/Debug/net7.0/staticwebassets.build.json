@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ccO/SHTzWjY4bwpB9HyFHT5Rb91Li9URf8JAeOCq++U=",
+  "Hash": "prbtZMFJr320iZWvD8e9+ntrtZhXTN72VzfmUn4aqIg=",
   "Source": "ECommerce",
   "BasePath": "_content/ECommerce",
   "Mode": "Default",
@@ -1919,6 +1919,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\Tree2.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\js\\Search.js",
+      "SourceId": "ECommerce",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\",
+      "BasePath": "_content/ECommerce",
+      "RelativePath": "js/Search.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Search.js"
     },
     {
       "Identity": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\js\\site.js",

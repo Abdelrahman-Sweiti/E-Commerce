@@ -2,7 +2,6 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,10 +44,25 @@
                         </li>
                     }
 
+                    @if (User.Identity.IsAuthenticated)
+                    {
 
-            </ul>
+                        <li>
+                            <div class="Search-box ">
+                                <form method="get" asp-controller="Products" asp-action="Rows">
+                                    <div class="input-group field FormWidth">
+                                        <input class="form-control search-bar" type="text" name="productname" placeholder="Search for a product" required />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary search-btn" type="submit">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                    }
+                </ul>
                 <ul class="ms-auto"> <partial name="LoginInfo" /> </ul>
-
             </div>
         </nav>
     </header>

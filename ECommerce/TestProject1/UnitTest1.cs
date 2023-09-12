@@ -23,7 +23,7 @@ namespace TestProject1
             var userManager = MockUserManager();
             var signInManager = MockSignInManager(); // Add this line
             var roleManager = MockRoleManager();
-            var userService = new IdentityUserService(userManager.Object, signInManager.Object, roleManager.Object); // Pass signInManager here
+            var userService = new IdentityUserService(userManager.Object, signInManager.Object, roleManager.Object,null); // Pass signInManager here
             var usermodel = new RegisterUserDTO
             {
                 FirstName = "John",
@@ -36,7 +36,7 @@ namespace TestProject1
             };
 
             // Act
-            var result = await userService.Register(usermodel, new ModelStateDictionary());
+            var result = await userService.Register(usermodel, new ModelStateDictionary(),null);
 
             // Assert
             Assert.NotNull(result);
@@ -52,7 +52,7 @@ namespace TestProject1
             var userManager = MockUserManager();
             var signInManager = MockSignInManager();
             var roleManager = MockRoleManager();
-            var userService = new IdentityUserService( userManager.Object, signInManager.Object, roleManager.Object);
+            var userService = new IdentityUserService( userManager.Object, signInManager.Object, roleManager.Object,null);
 
             var user = new ApplicationUser
             {
@@ -121,5 +121,8 @@ namespace TestProject1
 
             return signInManager;
         }
+
+
+
     }
 }

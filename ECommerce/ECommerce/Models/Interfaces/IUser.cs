@@ -8,7 +8,7 @@ namespace ECommerce.Models.Interfaces
     public interface IUser
     {
 
-        public Task<UserDTO> Register(RegisterUserDTO registerDto, ModelStateDictionary modelstate);
+        public Task<UserDTO> Register(RegisterUserDTO registerDto, ModelStateDictionary modelstate, IFormFile file);
         //login Method
 
         public Task<UserDTO> Authenticate(string username, string password);
@@ -17,6 +17,7 @@ namespace ECommerce.Models.Interfaces
         // logout method
         public Task LogOut();
         public Task<List<ApplicationUser>> getAll();
+        Task<ApplicationUser> GetFile(IFormFile file, ApplicationUser registerUserDTO);
 
 
     }

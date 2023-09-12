@@ -205,6 +205,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\js\\Search.js",
+      "PackagePath": "staticwebassets\\js\\Search.js"
+    },
+    {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

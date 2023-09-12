@@ -62,13 +62,14 @@ namespace ECommerce.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Category category)
+        public async Task<IActionResult> Create(Category category, IFormFile file)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                await _Category.GetFile(file, category);
+                await _Category.Create(category);
+
+                return RedirectToAction("Index", "Categories");
             }
             return View(category);
         }
@@ -189,10 +190,12 @@ namespace ECommerce.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddProductToCategories(ProductsCategory categoryProduct )
+        public async Task<IActionResult> AddProductToCategories(ProductsCategory categoryProduct, IFormFile file)
         {
             if (ModelState.IsValid)
             {
+                await _Category.GetFile(file, categoryProduct.product);
+
                 await _Category.AddProductToCategories(categoryProduct.CategoryId, categoryProduct.product);
 
                 return RedirectToAction("Index", "Main");

@@ -7,6 +7,8 @@ using System.Security.Claims;
 using ECommerce.Models.DTOs;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
+using Azure.Storage.Blobs.Models;
+using Azure.Storage.Blobs;
 
 namespace ECommerce.Models.Services
 {
@@ -16,28 +18,35 @@ namespace ECommerce.Models.Services
             private UserManager<ApplicationUser> _userManager;
             private SignInManager<ApplicationUser> _signInManager;
             private RoleManager<IdentityRole> _roleManager;
+            private readonly IConfiguration _configration;
 
-            public IdentityUserService(
+        public IdentityUserService(
                 UserManager<ApplicationUser> manager,
                 SignInManager<ApplicationUser> signInManager,
-                RoleManager<IdentityRole> roleManager)
-            {
-                _userManager = manager;
-                _signInManager = signInManager;
-                _roleManager = roleManager;
-            }
+                RoleManager<IdentityRole> roleManager,
+                IConfiguration configration)
+        {
+            _userManager = manager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
+            _configration = configration;
+        }
 
-        public async Task<UserDTO> Register(RegisterUserDTO usermodel, ModelStateDictionary modelState)
+        public async Task<UserDTO> Register(RegisterUserDTO usermodel, ModelStateDictionary modelState, IFormFile file)
         {
             var user = new ApplicationUser()
             {
                 FirstName = usermodel.FirstName,
                 LastName = usermodel.LastName,
                 Gender = usermodel.Gender,
-                Image = usermodel.Image,
                 Email = usermodel.Email,
                 UserName = usermodel.Email
             };
+
+            if (file != null)
+            {
+                user = await GetFile(file, user);
+            }
 
             var result = await _userManager.CreateAsync(user, usermodel.Password);
 
@@ -77,6 +86,7 @@ namespace ECommerce.Models.Services
             return null;
         }
 
+
         public async Task<UserDTO> Authenticate(string username, string password)
             {
                 var result = await _signInManager.PasswordSignInAsync(username, password, true, false);
@@ -115,6 +125,31 @@ namespace ECommerce.Models.Services
             {
                 return await _userManager.Users.ToListAsync();
             }
+
+
+        public async Task<ApplicationUser> GetFile(IFormFile file, ApplicationUser registerUserDTO)
+        {
+            BlobContainerClient container = new BlobContainerClient(_configration.GetConnectionString("StorageConnection"), "images");
+            await container.CreateIfNotExistsAsync();
+            BlobClient blob = container.GetBlobClient(file.FileName);
+
+            using var stream = file.OpenReadStream();
+            BlobUploadOptions options = new BlobUploadOptions()
+            {
+                HttpHeaders = new BlobHttpHeaders() { ContentType = file.ContentType }
+            };
+
+            if (!await blob.ExistsAsync())
+            {
+                await blob.UploadAsync(stream, options);
+            }
+
+            registerUserDTO.Image = blob.Uri.ToString();
+
+            return registerUserDTO;
         }
+
+
     }
+}
 
