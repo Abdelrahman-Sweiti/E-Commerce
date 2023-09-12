@@ -1,0 +1,113 @@
+﻿html {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+
+
+.glass {
+    background: rgb(32 237 220 / 30%);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 400px;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+    .glass:hover {
+        opacity: 0.9;
+    }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) translateY(0);
+    }
+}
+
+
+.container {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.subtn {
+    width: 100%;
+    margin-top:20px;
+}
+
+label {
+    color: floralwhite;
+    font-weight: bold;
+}
+
+input:focus,
+input:focus-within {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.field input {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(255 244 244 / 30%);
+    border-style: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.field-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .field-group .field {
+        flex: 2; 
+        margin-right: 10px; 
+    }
+
+    .field-group label {
+        display: block;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+.test-danger {
+font-weight:bold;
+
+}
+
+.btn-primary {
+    background-color: #662a87;
+    font-weight: bold;
+    border-color: #662a87;
+}
+
+h2 {
+font-weight:bold;
+color:white;
+}
+

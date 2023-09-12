@@ -1,0 +1,57 @@
+﻿@model List<ECommerce.Models.ProductsCategory>
+
+@{
+    ViewData["Title"] = "GetAllProductsForCategory";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<link rel="stylesheet" href="~/css/CardStyling.css" />
+<link rel="stylesheet" href="~/css/ProdToCategory.css" />
+
+<h1>@ViewData["CategoryName"] Products</h1>
+
+<div class="row mx-auto">
+    @foreach (var productCategory in Model)
+    {
+        <div class="col-md-3 product-card">
+            <a asp-controller="Products" asp-action="Details" asp-route-id="@productCategory.product.Id" class="card-link">
+                <div class="card mb-4 border border-5 border-dark CStyle">
+                    @if (productCategory.product.ImageUri != null)
+                    {
+                        <img src="@productCategory.product.ImageUri" class="card-img-top" alt="@productCategory.product.ProductName" width="200" height="200">
+                    }
+                    else
+                    {
+                        <p class="card-text">No Image Available</p>
+                    }
+                    <div class="card-body bg-">
+                        <h5 class="card-title">@productCategory.product.ProductName</h5>
+                        <p class="card-text">@productCategory.product.Description</p>
+                        <p class="card-text">$@productCategory.product.Price</p>
+                       @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@productCategory.product.Id" class="btn btn-primary">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@productCategory.product.Id" class="btn btn-danger">Delete</a>
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form method="post" asp-controller="Products" asp-action="AddToCart">
+                                <input type="hidden" name="productId" value="@productCategory.product.Id" />
+                                <button type="submit" class="btn btn-success">Add to Cart</button>
+                            </form>
+                        }
+                        
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-action="Index" class="btn btn-secondary mt-4">Back to List</a>
+    </div>
+}
+
+
