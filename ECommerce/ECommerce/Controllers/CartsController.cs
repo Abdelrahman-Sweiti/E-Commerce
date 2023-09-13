@@ -7,25 +7,57 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ECommerce.Data;
 using ECommerce.Models;
+using ECommerce.Models.Services;
+using Microsoft.AspNetCore.Identity;
+using ECommerce.Models.Interfaces;
 
 namespace ECommerce.Controllers
 {
     public class CartsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public CartsController(ApplicationDbContext context)
+        private readonly IUser _User;
+        private readonly ICart _Cart;
+        public CartsController(ApplicationDbContext context,IUser User, ICart cart)
         {
             _context = context;
+            _User = User;
+            _Cart = cart;
         }
+
 
         // GET: Carts
         public async Task<IActionResult> Index()
         {
-              return _context.carts != null ? 
-                          View(await _context.carts.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.carts'  is null.");
+            var user = await _User.GetUser(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account"); // Redirect to login page if the user is not authenticated
+            }
+           
+            var productsInCart = await _Cart.GetProductsInCartAsync(user.Id);
+
+            return View(productsInCart);
         }
+
+        //public int GetProductsCount(string Username)
+        //{ 
+        //int products = _Cart.GetCartItemCountAsync(Username);
+        //    return products;
+        //}
+
+        public async Task<IActionResult> GetCartItemCount()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var cartItemCount = await _Cart.GetCartItemCountAsync(User.Identity.Name);
+                return Json(new { cartItemCount });
+            }
+
+            // Handle the case where the user is not authenticated (return 0 or an error).
+            return Json(new { cartItemCount = 0 });
+        }
+
 
         // GET: Carts/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -159,5 +191,10 @@ namespace ECommerce.Controllers
         {
           return (_context.carts?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+
+        // CartService.cs
+       
+
     }
 }

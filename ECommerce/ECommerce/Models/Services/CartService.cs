@@ -36,5 +36,42 @@ namespace ECommerce.Models.Services
 
             return cart;
         }
+
+        public async Task<List<ProductsCart>> GetProductsInCartAsync(string userId)
+        {
+            // Find the user's cart
+            var cart = await _context.carts
+                .Include(c => c.productsCarts)
+                .ThenInclude(pc => pc.product)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart == null)
+            {
+                return new List<ProductsCart>(); // Return an empty list if the user has no cart
+            }
+
+            // Extract the products from the cart
+            var productsCarts = cart.productsCarts.ToList();
+            return productsCarts;
+        }
+        public async Task<int> GetCartItemCountAsync(string userId)
+        {
+            // Find the user's cart
+            var cart = await _context.carts
+                .Include(c => c.productsCarts)
+                .FirstOrDefaultAsync(c => c.UserId == userId);
+
+            if (cart == null)
+            {
+                return 0; // Return 0 if the user has no cart
+            }
+
+            // Calculate the total quantity of products in the cart
+            var totalQuantity = cart.productsCarts.Sum(pc => pc.Quantity);
+
+            return totalQuantity;
+        }
+
+
     }
 }
