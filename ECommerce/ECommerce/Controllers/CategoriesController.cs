@@ -95,7 +95,7 @@ namespace ECommerce.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Category category,IFormFile file)
         {
             if (id != category.Id)
             {
@@ -106,6 +106,7 @@ namespace ECommerce.Controllers
             {
                 try
                 {
+                    await _Category.GetFile(file, category);
                     _context.Update(category);
                     await _context.SaveChangesAsync();
                 }

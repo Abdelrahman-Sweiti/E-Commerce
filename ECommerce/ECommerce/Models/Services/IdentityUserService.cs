@@ -149,6 +149,27 @@ namespace ECommerce.Models.Services
             return registerUserDTO;
         }
 
+        //public async Task<UpdataInfoModel> GetFile2(IFormFile file, UpdataInfoModel registerUserDTO)
+        //{
+        //    BlobContainerClient container = new BlobContainerClient(_configration.GetConnectionString("StorageConnection"), "images");
+        //    await container.CreateIfNotExistsAsync();
+        //    BlobClient blob = container.GetBlobClient(file.FileName);
+
+        //    using var stream = file.OpenReadStream();
+        //    BlobUploadOptions options = new BlobUploadOptions()
+        //    {
+        //        HttpHeaders = new BlobHttpHeaders() { ContentType = file.ContentType }
+        //    };
+
+        //    if (!await blob.ExistsAsync())
+        //    {
+        //        await blob.UploadAsync(stream, options);
+        //    }
+
+        //    registerUserDTO.Image = blob.Uri.ToString();
+
+        //    return registerUserDTO;
+        //}
 
     }
 }

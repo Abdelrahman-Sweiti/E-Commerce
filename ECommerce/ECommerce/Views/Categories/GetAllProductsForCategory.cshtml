@@ -27,25 +27,27 @@
                         <h5 class="card-title">@productCategory.product.ProductName</h5>
                         <p class="card-text">@productCategory.product.Description</p>
                         <p class="card-text">$@productCategory.product.Price</p>
-                       @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                        {
-                            <a asp-action="Edit" asp-route-id="@productCategory.product.Id" class="btn btn-primary">Edit</a>
-                            <a asp-action="Delete" asp-route-id="@productCategory.product.Id" class="btn btn-danger">Delete</a>
-                        }
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <form method="post" asp-controller="Products" asp-action="AddToCart">
-                                <input type="hidden" name="productId" value="@productCategory.product.Id" />
-                                <button type="submit" class="btn btn-success">Add to Cart</button>
-                            </form>
-                        }
-                        
+                        <div class="btn-group" role="group">
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                <a asp-action="Edit" asp-route-id="@productCategory.product.Id" class="btn btn-primary ms-2">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@productCategory.product.Id" class="btn btn-danger ms-2">Delete</a>
+                            }
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <form method="post" asp-controller="Products" asp-action="AddToCart" class="ms-2">
+                                    <input type="hidden" name="productId" value="@productCategory.product.Id" />
+                                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                                </form>
+                            }
+                        </div>
                     </div>
                 </div>
             </a>
         </div>
     }
 </div>
+
 
 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
 {

@@ -19,6 +19,7 @@ namespace ECommerce.Models.Interfaces
         public Task<List<ApplicationUser>> getAll();
         Task<ApplicationUser> GetFile(IFormFile file, ApplicationUser registerUserDTO);
 
+        //Task<UpdataInfoModel> GetFile2(IFormFile file, UpdataInfoModel registerUserDTO);
 
     }
 }

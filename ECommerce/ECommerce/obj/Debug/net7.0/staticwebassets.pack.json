@@ -133,6 +133,10 @@
       "PackagePath": "staticwebassets\\css\\CardStyling.css"
     },
     {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\CartStyle.css",
+      "PackagePath": "staticwebassets\\css\\CartStyle.css"
+    },
+    {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\CateToProduct.css",
       "PackagePath": "staticwebassets\\css\\CateToProduct.css"
     },

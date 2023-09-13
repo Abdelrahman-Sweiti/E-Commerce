@@ -46,21 +46,18 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-
-                        <li>
-                            <div class="Search-box ">
-                                <form method="get" asp-controller="Products" asp-action="Rows">
-                                    <div class="input-group field FormWidth">
-                                        <input class="form-control search-bar" type="text" name="productname" placeholder="Search for a product" required />
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary search-btn" type="submit">Search</button>
-                                        </div>
+                        <li class="Search-item">
+                            <form method="get" asp-controller="Products" asp-action="Rows">
+                                <div class="input-group field FormWidth">
+                                    <input class="form-control search-bar" type="text" name="productname" placeholder="Search for a product" required />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary search-btn" type="submit">Search</button>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </li>
-
                     }
+
                 </ul>
                 <ul class="ms-auto"> <partial name="LoginInfo" /> </ul>
             </div>

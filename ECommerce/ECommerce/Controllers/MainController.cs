@@ -2,6 +2,7 @@
 using ECommerce.Models;
 using ECommerce.Models.DTOs;
 using ECommerce.Models.Interfaces;
+using ECommerce.Models.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +19,8 @@ namespace ECommerce.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext _context;
         private readonly ICategory _Category;
-
-        public MainController(IUser user, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext context, ICategory category)
+        private readonly ICart _Cart;
+       public MainController(IUser user, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext context, ICategory category, ICart cart)
         {
 
             _userManager = userManager;
@@ -27,6 +28,7 @@ namespace ECommerce.Controllers
             _user = user;
             _context = context;
             _Category = category;
+            _Cart = cart;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
