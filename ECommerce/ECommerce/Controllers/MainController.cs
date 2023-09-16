@@ -4,6 +4,7 @@ using ECommerce.Models.DTOs;
 using ECommerce.Models.Interfaces;
 using ECommerce.Models.Services;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -103,7 +104,7 @@ namespace ECommerce.Controllers
         }
 
 
-
+        [Authorize]
         [Route("Logout")]
         public async Task<IActionResult> LogOut()
         {
@@ -138,7 +139,7 @@ namespace ECommerce.Controllers
             return View();
         }
 
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> UpdateInfo(UpdataInfoModel model)
         {

@@ -10,6 +10,7 @@ using ECommerce.Models;
 using ECommerce.Models.Services;
 using Microsoft.AspNetCore.Identity;
 using ECommerce.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce.Controllers
 {
@@ -27,6 +28,7 @@ namespace ECommerce.Controllers
 
 
         // GET: Carts
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             var user = await _User.GetUser(User);

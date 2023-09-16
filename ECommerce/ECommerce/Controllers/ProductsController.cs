@@ -36,6 +36,9 @@ namespace ECommerce.Controllers
         }
 
 
+
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddToCart(int productId)
         {
@@ -64,7 +67,7 @@ namespace ECommerce.Controllers
 
 
 
-
+        [Authorize]
         public async Task<IActionResult> FilterProducts(string filter)
         {
             IQueryable<Product> query = _context.products;
@@ -95,8 +98,42 @@ namespace ECommerce.Controllers
             return View(products);
         }
 
+        [Authorize]
+        public async Task<IActionResult> FilterProductsByCategory(string filter, int categoryId)
+        {
+            IQueryable<Product> query = _context.products;
+
+            // Filter by category ID
+            query = query.Where(p => p.productsCategories.Any(pc => pc.CategoryId == categoryId));
+
+            switch (filter)
+            {
+                case "HighToLowPrice":
+                    query = query.OrderByDescending(p => p.Price);
+                    break;
+
+                case "LowToHighPrice":
+                    query = query.OrderBy(p => p.Price);
+                    break;
+
+                case "OrderByAlphaBetAsend":
+                    query = query.OrderBy(p => p.ProductName);
+                    break;
+
+                case "OrderByAlphaBetDesend":
+                    query = query.OrderByDescending(p => p.ProductName);
+                    break;
+
+                default:
+                    break;
+            }
+
+            var products = await query.ToListAsync();
+            return View(products);
+        }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ViewAllProducts()
         {
             return View(await _context.products.ToListAsync());
@@ -109,7 +146,7 @@ namespace ECommerce.Controllers
             return RedirectToAction("Rows");
         }
 
-
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Rows(string productname)
         {
@@ -122,7 +159,6 @@ namespace ECommerce.Controllers
 
             return View(await rows.ToListAsync());
         }
-
 
 
         // GET: BookModels/Details/5
@@ -153,13 +189,14 @@ namespace ECommerce.Controllers
 
 
         // GET: BookModels/Create
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Product product, IFormFile file)
@@ -180,7 +217,7 @@ namespace ECommerce.Controllers
 
 
 
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.products == null)
@@ -201,6 +238,7 @@ namespace ECommerce.Controllers
         // POST: BookModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ProductName,ImageUri,Price,Description")] Product product, IFormFile file)
@@ -235,6 +273,7 @@ namespace ECommerce.Controllers
         }
 
         // GET: BookModels/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -268,6 +307,7 @@ namespace ECommerce.Controllers
             return _context.products.Any(e => e.Id == id);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult AddCategoryToProduct(int ProductId)
         {
             ProductsCategory categoryProduct = new ProductsCategory()
@@ -280,6 +320,7 @@ namespace ECommerce.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddCategoryToProduct(ProductsCategory categoryProduct)
         {
             if (ModelState.IsValid)
