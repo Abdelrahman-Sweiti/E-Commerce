@@ -55,7 +55,7 @@ namespace ECommerce
             builder.Services.ConfigureApplicationCookie(options =>
             {
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(15);
-                options.LoginPath = "/Main/Login";
+                options.LoginPath = "/Main/Login/";
             });
 
             var app = builder.Build();

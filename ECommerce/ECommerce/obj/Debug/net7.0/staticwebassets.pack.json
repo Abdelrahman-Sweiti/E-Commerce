@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\DeleteCategory.css"
     },
     {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\Images\\565.jpg",
+      "PackagePath": "staticwebassets\\Images\\565.jpg"
+    },
+    {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\Images\\Arrival.png",
       "PackagePath": "staticwebassets\\Images\\Arrival.png"
     },
@@ -43,6 +47,10 @@
     {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\Images\\RegVid.mp4",
       "PackagePath": "staticwebassets\\Images\\RegVid.mp4"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\Images\\Slider2.png",
+      "PackagePath": "staticwebassets\\Images\\Slider2.png"
     },
     {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\Images\\The Joy of Books.mp4",
@@ -105,6 +113,14 @@
       "PackagePath": "staticwebassets\\Images\\invoked.png"
     },
     {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\Images\\m2.jpg",
+      "PackagePath": "staticwebassets\\Images\\m2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\Images\\m3.jpg",
+      "PackagePath": "staticwebassets\\Images\\m3.jpg"
+    },
+    {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\Images\\phone1.png",
       "PackagePath": "staticwebassets\\Images\\phone1.png"
     },
@@ -161,6 +177,10 @@
       "PackagePath": "staticwebassets\\css\\EditCategory.css"
     },
     {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\Filter2.css",
+      "PackagePath": "staticwebassets\\css\\Filter2.css"
+    },
+    {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\LayoutStyle1.css",
       "PackagePath": "staticwebassets\\css\\LayoutStyle1.css"
     },
@@ -171,6 +191,10 @@
     {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\LogIn.css",
       "PackagePath": "staticwebassets\\css\\LogIn.css"
+    },
+    {
+      "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\OdaiStyling.css",
+      "PackagePath": "staticwebassets\\css\\OdaiStyling.css"
     },
     {
       "Id": "C:\\Users\\user\\source\\repos\\E-Commerce\\ECommerce\\ECommerce\\wwwroot\\css\\ProdDelete.css",

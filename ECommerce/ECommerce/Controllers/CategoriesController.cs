@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ECommerce.Data;
 using ECommerce.Models;
 using ECommerce.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce.Controllers
 {
@@ -26,6 +27,7 @@ namespace ECommerce.Controllers
         }
 
         // GET: Categories
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             var list1 = await _Category.GetCategories();
@@ -34,6 +36,7 @@ namespace ECommerce.Controllers
         }
 
         // GET: Categories/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.categories == null)
@@ -52,6 +55,7 @@ namespace ECommerce.Controllers
         }
 
         // GET: Categories/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -62,6 +66,7 @@ namespace ECommerce.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(Category category, IFormFile file)
         {
             if (ModelState.IsValid)
@@ -75,6 +80,7 @@ namespace ECommerce.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.categories == null)
@@ -95,6 +101,7 @@ namespace ECommerce.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Category category,IFormFile file)
         {
             if (id != category.Id)
@@ -127,6 +134,7 @@ namespace ECommerce.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.categories == null)
@@ -191,6 +199,7 @@ namespace ECommerce.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddProductToCategories(ProductsCategory categoryProduct, IFormFile file)
         {
             if (ModelState.IsValid)

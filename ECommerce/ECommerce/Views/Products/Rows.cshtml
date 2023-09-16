@@ -42,6 +42,14 @@
                                 </form>
                             </div>
                         }
+                        else if (User.Identity.IsAuthenticated)
+                        {
+                            <form method="post" asp-controller="Products" asp-action="AddToCart">
+                                <input type="hidden" name="productId" value="@item.Id" />
+                                <button type="submit" class="btn btn-success ms-2">Add to Cart</button>
+                            </form>
+                        
+                        }
                     </div>
                 </div>
             </a>
