@@ -76,4 +76,5 @@ As a User, you can browse products and categories, explore available items, and 
 We extend our heartfelt gratitude to our dedicated team for their expertise, commitment, and collaborative spirit in bringing this application to life:
 - **OdaiAl-Obaidat**
 - **Abdul Rahman Al-Suwaiti**
+- 
 Thank you for choosing "Global Shopping." Explore, experience, and embrace the wonders of Japan with us.
