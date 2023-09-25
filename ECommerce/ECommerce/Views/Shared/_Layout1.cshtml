@@ -31,7 +31,7 @@
                         <a class="nav-link" href="#Services">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#Contact">Contact</a>
+                        <a class="nav-link" asp-controller="Main" asp-action="ContactUs">ContactUs</a>
                     </li>
                     @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                     {
@@ -51,7 +51,7 @@
                         <li class="Search-item">
                             <form method="get" asp-controller="Products" asp-action="Rows">
                                 <div class="input-group field FormWidth">
-                                    <input class="form-control search-bar" type="text" name="productname" placeholder="Search for a product" required />
+                                    <input class="form-control rounded" type="text" name="productname" placeholder="Search for a product" required />
                                     <div class="input-group-append">
                                         <button class="btn btn-primary search-btn" type="submit">Search</button>
                                     </div>

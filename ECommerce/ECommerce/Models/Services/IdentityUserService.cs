@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Azure.Storage.Blobs.Models;
 using Azure.Storage.Blobs;
+using System.Net.Mail;
 
 namespace ECommerce.Models.Services
 {
@@ -148,6 +149,8 @@ namespace ECommerce.Models.Services
 
             return registerUserDTO;
         }
+
+        
 
         //public async Task<UpdataInfoModel> GetFile2(IFormFile file, UpdataInfoModel registerUserDTO)
         //{

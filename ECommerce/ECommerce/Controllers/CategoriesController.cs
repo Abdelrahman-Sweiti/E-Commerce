@@ -102,35 +102,16 @@ namespace ECommerce.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Category category,IFormFile file)
+        public async Task<IActionResult> Edit(int id,Category category,IFormFile? file)
         {
-            if (id != category.Id)
+            if (file != null)
             {
-                return NotFound();
+                await _Category.GetFile(file, category);
+
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    await _Category.GetFile(file, category);
-                    _context.Update(category);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CategoryExists(category.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(category);
+            await _Category.UpdateCategoryAsync(id,category);
+            return RedirectToAction("Index","Categories");
         }
 
         // GET: Categories/Delete/5

@@ -40,7 +40,7 @@ namespace ECommerce.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> AddToCart(int productId)
+        public async Task<IActionResult> AddToCart(int productId, int quantity)
         {
             var user = await _User.GetUser(User);
             if (user == null)
@@ -59,11 +59,11 @@ namespace ECommerce.Controllers
             var cart = await _cart.GetOrCreateCartAsync(user.Id);
 
             // Add the product to the cart
-            var quantity = 1; // You can adjust the quantity as needed
             await _productsCart.AddProductToCartAsync(cart.Id, productId, quantity);
 
             return RedirectToAction("Index", "Main"); // Redirect to the cart view or any other desired page
         }
+
 
 
 
@@ -98,7 +98,6 @@ namespace ECommerce.Controllers
             return View(products);
         }
 
-        [Authorize]
         public async Task<IActionResult> FilterProductsByCategory(string filter, int categoryId)
         {
             IQueryable<Product> query = _context.products;
@@ -217,7 +216,6 @@ namespace ECommerce.Controllers
 
 
 
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.products == null)
@@ -238,39 +236,22 @@ namespace ECommerce.Controllers
         // POST: BookModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ProductName,ImageUri,Price,Description")] Product product, IFormFile file)
+        public async Task<IActionResult> Edit(int id, Product product, IFormFile? file)
         {
-            if (id != product.Id)
+            if (file != null)
             {
-                return NotFound();
+                await _Product.GetFile(file, product);
+
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    await _Product.GetFile(file, product);
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductExists(product.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction("ViewAllProducts", "Products");
-            }
-            return RedirectToAction("ViewAllProducts", "Products");
+            await _Product.UpdateProductAsync(id,product);
+            return RedirectToAction("ViewAllProducts","Products");
         }
+
+
+
 
         // GET: BookModels/Delete/5
         [Authorize(Roles = "Admin")]

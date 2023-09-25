@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAK2WKXcNr2Uufk9f1+JcGbQAAAAACAAAAAAAQZgAAAAEAACAAAABs6RezYH2iLnTcKulj8tbhl+VuOOK2YT8WhyuzgHP00gAAAAAOgAAAAAIAACAAAADLDDInk2QcyUyvDkatWbieiZSGjc94vMFMxgfjGT1NR4AAAAA/tNgvdtz+xs2UJKBHMgUjVugHNXyx1xmdIHMiPVIyfXNw0vpQNiqloDUKkNWVw6UIdxLqu1A0snhbMRz3j1OE+AOZtHHW6h8B6zn8aDZR8aSzZ0iWo4GLAkMHwJGrOBCpxD6F2dayC7w/4F/PbIcqdxpFGEmcy143+og2zH/sVEAAAAAkK13XGHe4ePPjMN2ZPfnm5iyIxhqOulwyoBqr7fGPAPgtAePjqzNvf7th69fYNCoVRK1wsUQDXHpsZs58OlXA</EncryptedPassword>
+    <History>True|2023-09-17T01:03:01.5893400Z;True|2023-09-17T03:40:39.3944568+03:00;False|2023-09-17T03:38:00.6952507+03:00;False|2023-09-17T03:35:32.4466949+03:00;False|2023-09-17T03:32:41.7212783+03:00;False|2023-09-17T03:28:59.2851860+03:00;True|2023-09-17T03:22:08.2267801+03:00;True|2023-09-17T03:18:58.7184001+03:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <EFMigrations Include="ECommerce.Data.ApplicationDbContext">
+      <Value>Data Source=ecommercedbserver1.database.windows.net,1433%3bInitial Catalog=ECommerce_db%3bUser ID=Abdelrahman%3bPassword=Invoked666%40</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

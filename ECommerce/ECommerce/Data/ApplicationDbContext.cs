@@ -27,6 +27,7 @@ namespace ECommerce.Data
                {
                    ProductsCart.CartId,
                    ProductsCart.ProductId
+
                }
                );
 

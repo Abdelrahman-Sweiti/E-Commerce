@@ -8,18 +8,17 @@ namespace ECommerce.Models.Interfaces
     public interface IUser
     {
 
-        public Task<UserDTO> Register(RegisterUserDTO registerDto, ModelStateDictionary modelstate, IFormFile file);
+         Task<UserDTO> Register(RegisterUserDTO registerDto, ModelStateDictionary modelstate, IFormFile file);
         //login Method
 
-        public Task<UserDTO> Authenticate(string username, string password);
+         Task<UserDTO> Authenticate(string username, string password);
         // Get All users method
-        public Task<UserDTO> GetUser(ClaimsPrincipal principal);
+         Task<UserDTO> GetUser(ClaimsPrincipal principal);
         // logout method
-        public Task LogOut();
-        public Task<List<ApplicationUser>> getAll();
+         Task LogOut();
+         Task<List<ApplicationUser>> getAll();
         Task<ApplicationUser> GetFile(IFormFile file, ApplicationUser registerUserDTO);
 
         //Task<UpdataInfoModel> GetFile2(IFormFile file, UpdataInfoModel registerUserDTO);
-
     }
 }

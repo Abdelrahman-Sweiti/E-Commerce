@@ -15,5 +15,6 @@
     <WebStackScaffolding_DbContextTypeFullName>ECommerce.Data.ApplicationDbContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
+    <NameOfLastUsedPublishProfile>C:\Users\user\source\repos\E-Commerce\ECommerce\ECommerce\Properties\PublishProfiles\GlobalShopping - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

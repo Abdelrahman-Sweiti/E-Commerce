@@ -102,5 +102,34 @@ namespace ECommerce.Models.Services
 
             return product;
         }
+
+
+        public async Task<Category> UpdateCategoryAsync(int id, Category category)
+        {
+            var existingCategory = await _context.categories.FindAsync(id);
+
+            if (existingCategory == null)
+            {
+                return null; // Or throw an exception indicating not found
+            }
+
+            // Update product properties
+            existingCategory.Name = category.Name;
+            existingCategory.Description = category.Description;
+
+            // Only update the image URL if a new image is provided
+            if (category.CategoryCover != null)
+            {
+                existingCategory.CategoryCover = category.CategoryCover;
+            }
+
+            // Assuming DepartmentID is a foreign key, update it if provided
+
+
+            _context.Entry(existingCategory).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return existingCategory;
+        }
     }
 }

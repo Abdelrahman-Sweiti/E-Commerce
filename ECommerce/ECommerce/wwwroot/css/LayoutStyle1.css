@@ -46,26 +46,8 @@ body {
         }
 
 
-.Search-box {
-    display: flex;
-    align-items: center;
-    margin-left: 150px !important;
-}
-
-.search-bar {
-    flex-grow: 1; 
-    border-radius: 0;
-}
-
-.search-btn {
-    border-radius: 0; 
-}
-
-.FormWidth {
-width:300px !important;
 
 
-}
 
 /* Custom CSS for responsive search item placement */
 @media (max-width: 768px) {
@@ -104,4 +86,17 @@ width:300px !important;
 
 .active-cyan .fa, .active-cyan-2 .fa {
     color: #4dd0e1 !important;
+}
+
+.search-bar {
+    width: 200px;
+    display: inline-block;
+    position: relative;
+}
+
+.search-input {
+    display: none;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
 }
