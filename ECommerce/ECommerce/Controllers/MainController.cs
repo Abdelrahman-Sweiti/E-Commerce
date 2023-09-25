@@ -21,7 +21,8 @@ namespace ECommerce.Controllers
         private readonly ApplicationDbContext _context;
         private readonly ICategory _Category;
         private readonly ICart _Cart;
-       public MainController(IUser user, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext context, ICategory category, ICart cart)
+        private readonly IEmailSender _emailSender;
+      public MainController(IUser user, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext context, ICategory category, ICart cart, IEmailSender emailSender)
         {
 
             _userManager = userManager;
@@ -30,6 +31,7 @@ namespace ECommerce.Controllers
             _context = context;
             _Category = category;
             _Cart = cart;
+            _emailSender = emailSender;
         }
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -45,7 +47,28 @@ namespace ECommerce.Controllers
             return RedirectToAction("Rows", "Products", new { productname });
         }
 
-       
+        [HttpGet]
+        public IActionResult SendEmail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SendEmail(string email, string subject, string message)
+        {
+            try
+            {
+                // Use the email, subject, and message to send the email
+                await _emailSender.SendEmailAsync(email, subject, message);
+                ViewBag.Message = "Email sent successfully.";
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = $"Error sending email: {ex.Message}";
+            }
+
+            return View();
+        }
 
         [HttpGet]
         [Route("Login")]
