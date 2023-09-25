@@ -41,6 +41,7 @@ namespace ECommerce
             builder.Services.AddTransient<IProductsCategory, ProductsCategoryService>();
             builder.Services.AddTransient<ICart, CartService>();
             builder.Services.AddTransient<IProductsCart, ProductsCartService>();
+            builder.Services.AddTransient<IEmailSender, EmailSenderService>();
 
 
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
