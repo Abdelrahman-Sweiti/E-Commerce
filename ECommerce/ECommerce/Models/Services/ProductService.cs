@@ -76,6 +76,38 @@ namespace ECommerce.Models.Services
 
             return product;
         }
+
+
+
+        public async Task<Product> UpdateProductAsync(int id, Product product  )
+        {
+            var existingProduct = await _context.products.FindAsync(id);
+
+            if (existingProduct == null)
+            {
+                return null; // Or throw an exception indicating not found
+            }
+
+            // Update product properties
+            existingProduct.Price = product.Price;
+            existingProduct.ProductName = product.ProductName;
+            existingProduct.Description = product.Description;
+
+            // Only update the image URL if a new image is provided
+            if (product.ImageUri != null)
+            {
+                existingProduct.ImageUri = product.ImageUri;
+            }
+
+            // Assuming DepartmentID is a foreign key, update it if provided
+           
+
+            _context.Entry(existingProduct).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return existingProduct;
+        }
+
     }
 
 

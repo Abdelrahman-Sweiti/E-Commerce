@@ -70,7 +70,22 @@ namespace ECommerce.Controllers
             }
         }
 
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
 
+
+
+        [HttpPost]
+        public async Task<IActionResult> ContactUs(string name, string email, string message)
+        {
+            // Implement your email sending logic here
+
+            // For now, we'll just return a success message
+            ViewBag.Message = "Your message has been sent successfully!";
+            return View();
+        }
 
         [HttpGet]
         [Route("Register")]

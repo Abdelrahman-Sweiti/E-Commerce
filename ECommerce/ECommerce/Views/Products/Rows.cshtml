@@ -4,29 +4,63 @@
     ViewData["Title"] = "Rows";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
+
 <link rel="stylesheet" href="~/css/RowsStyle.css" />
 <link rel="stylesheet" href="~/css/CardStyling.css" />
 
+<style>
+    .product-card {
+        margin-bottom: 20px;
+        max-width: 300px; /* Adjust the max-width as needed */
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image {
+        max-height: 200px; /* Set the desired height for the image container */
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .product-image img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.2s;
+        }
+
+    .product-card:hover .product-image img {
+        transform: scale(1.1); /* Add a hover effect to the image */
+    }
+
+    .product-details {
+        padding: 16px;
+    }
+</style>
 
 <h2>Results</h2>
 <br />
-
 
 <div class="row mx-auto">
     @foreach (var item in Model)
     {
         <div class="col-md-3 product-card">
             <a asp-action="Details" asp-route-id="@item.Id" class="card-link">
-                <div class="card mb-4 border border-5 border-dark CStyle">
-                    @if (item.ImageUri != null)
-                    {
-                        <img src="@item.ImageUri" class="card-img-top" alt="@item.ProductName" width="200" height="200">
-                    }
-                    else
-                    {
-                        <p class="card-text">No Image Available</p>
-                    }
-                    <div class="card-body">
+                <div class="card border-0">
+                    <div class="product-image">
+                        @if (item.ImageUri != null)
+                        {
+                            <img src="@item.ImageUri" alt="@item.ProductName">
+                        }
+                        else
+                        {
+                            <p class="card-text">No Image Available</p>
+                        }
+                    </div>
+                    <div class="product-details">
                         <h5 class="card-title">@item.ProductName</h5>
                         <p class="card-text">@item.Description</p>
                         <p class="card-text">$@item.Price</p>
@@ -48,7 +82,6 @@
                                 <input type="hidden" name="productId" value="@item.Id" />
                                 <button type="submit" class="btn btn-success ms-2">Add to Cart</button>
                             </form>
-                        
                         }
                     </div>
                 </div>
@@ -56,5 +89,3 @@
         </div>
     }
 </div>
-
-

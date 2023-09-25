@@ -7,9 +7,9 @@
 
     body::before {
         content: '';
-        position: absolute;
         top: 0;
         left: 0;
+        position: fixed; /* Fixed position to cover the entire viewport */
         width: 100%;
         height: 100vh;
         background-color: rgba(0, 0, 0, 0.6);
@@ -80,3 +80,64 @@ h2 {
 p {
     font-weight: bold;
 }
+
+
+
+.filter-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.product-card {
+    margin-bottom: 20px;
+    max-width: 300px;
+    background-color: #f9f9f9; /* Background color */
+    border: 1px solid #e0e0e0; /* Border color */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Box shadow */
+}
+
+.product-image {
+    max-height: 200px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #ddd; /* Border for the image */
+    background-color: azure;
+}
+
+    .product-image img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.2s;
+    }
+
+.product-card:hover .product-image img {
+    transform: scale(1.1);
+}
+
+.product-details {
+    padding: 16px;
+}
+
+    .product-details h5 {
+        font-weight: bold;
+        color: #333; /* Text color for title */
+    }
+
+    .product-details p {
+        color: #666; /* Text color for description */
+    }
+
+
+    
+
+
+.filter-dropdown {
+    margin-top: 20px;
+}
+
+    .filter-dropdown .dropdown-toggle {
+        margin-bottom: 13px; /* Adjust the margin to create the desired space */
+    }

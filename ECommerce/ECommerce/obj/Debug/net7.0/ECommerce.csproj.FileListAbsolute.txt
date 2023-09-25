@@ -597,3 +597,5 @@ C:\Users\user\source\repos\E-Commerce\ECommerce\ECommerce\bin\Debug\net7.0\refs\
 C:\Users\user\source\repos\E-Commerce\ECommerce\ECommerce\bin\Debug\net7.0\Azure.Storage.Blobs.dll
 C:\Users\user\source\repos\E-Commerce\ECommerce\ECommerce\bin\Debug\net7.0\Azure.Storage.Common.dll
 C:\Users\user\source\repos\E-Commerce\ECommerce\ECommerce\bin\Debug\net7.0\System.IO.Hashing.dll
+C:\Users\user\source\repos\E-Commerce\ECommerce\ECommerce\bin\Debug\net7.0\SendGrid.dll
+C:\Users\user\source\repos\E-Commerce\ECommerce\ECommerce\bin\Debug\net7.0\StarkbankEcdsa.dll

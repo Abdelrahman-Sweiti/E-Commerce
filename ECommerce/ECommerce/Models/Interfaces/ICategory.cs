@@ -10,6 +10,7 @@ namespace ECommerce.Models.Interfaces
         Task<Category> GetFile(IFormFile file, Category category);
         Task<Category> Create(Category category  );
         Task<Product> GetFile(IFormFile file, Product product);
+        Task<Category> UpdateCategoryAsync(int id, Category category);
 
     }
 }
